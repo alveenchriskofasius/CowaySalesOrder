@@ -1,0 +1,96 @@
+﻿<local:BaseUI x:Class="CSO.UI.CustomerGridUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSO.UI" xmlns:UICustom="clr-namespace:UICustom"
+             mc:Ignorable="d" 
+             Loaded="BaseUI_Loaded"
+             d:DesignHeight="1080" d:DesignWidth="1920">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Background="White" Margin="0,0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition />
+
+            </Grid.RowDefinitions>
+
+            <Rectangle Margin="0" Fill="{StaticResource DarkBaseBrush}" StrokeThickness="0"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="LabelTitle" Content="FILTER" Style="{StaticResource LabelStyle}" Grid.Column="0" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Right">
+                    <UICustom:ImageButton  Margin="10,0"
+                        Content="Baru" x:Name="ButtonAdd" Style="{StaticResource FormActionButtonStyle}"
+                        NormalImage="/Resource/Image/icon-add-user-hover-32.png"
+                        HoverImage="/Resource/Image/icon-add-user-blue-32.png" Click="ButtonAction_Click"/>
+                    <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource LabelBrush}"  Margin="0,13"/>
+
+                    <UICustom:ImageButton Margin="10, 0, 10, 0"
+                        Content="Refresh" x:Name="ButtonRefresh" Style="{StaticResource FormActionButtonStyle}"
+                        NormalImage="/Resource/Image/icon-refresh-hover-32.png"
+                        HoverImage="/Resource/Image/icon-refresh-blue-32.png" Click="ButtonAction_Click"  />
+                    <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource LabelBrush}" Margin="0,13"/>
+
+                    <UICustom:ImageButton  Margin="10, 0, 20, 0"
+                        Content="Reset" x:Name="ButtonReset" Style="{StaticResource FormActionButtonStyle}"
+                        NormalImage="/Resource/Image/icon-clear-filters-hover-32.png"
+                        HoverImage="/Resource/Image/icon-clear-filters-blue-32.png" Click="ButtonAction_Click"/>
+
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <TextBox x:Name="TextName" Style="{StaticResource MaterialDesignTextBox}" Width="150"  Margin="10,0,20,0" VerticalAlignment="Center"
+                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextName_TextChanged"/>
+                <TextBlock Text="-- nama --" Style="{StaticResource TextBlockPlaceholderStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Tag="{Binding Text, ElementName=textName}"/>
+                <ComboBox x:Name="ComboType" HorizontalAlignment="Left" Margin="10,5,20,0" VerticalAlignment="Top" Width="150" 
+                          Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="ComboBox_SelectionChanged"
+                          SelectedValue="{Binding TraderTypeID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"  />
+                <TextBlock Text="-- tipe --" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextBlockPlaceholderStyle}" Margin="-170,0,0,0" Tag="{Binding Text, ElementName=ComboType}"/>
+                <ComboBox Name="ComboCity" HorizontalAlignment="Left" Margin="0,5,20,0" VerticalAlignment="Top" Width="150" 
+                                           Style="{StaticResource MaterialDesignComboBox}" ItemContainerStyle="{StaticResource ComboCityItemStyle}"
+                                           SelectionChanged="ComboBox_SelectionChanged" 
+                                           SelectedValue="{Binding Path=CityID, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="-- kota --" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextBlockPlaceholderStyle}" Margin="-170,0,0,0" Tag="{Binding Text, ElementName=ComboCity}"/>
+                <ComboBox x:Name="ComboArea" HorizontalAlignment="Left" Margin="0,5,20,0" VerticalAlignment="Top" Width="150" 
+                          Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="ComboBox_SelectionChanged"
+                          SelectedValue="{Binding AreaID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"  />
+                <TextBlock Text="-- area --" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextBlockPlaceholderStyle}" Margin="-170,0,0,0" Tag="{Binding Text, ElementName=ComboArea}"/>
+
+                <CheckBox Name="CheckActive" VerticalAlignment="Center" VerticalContentAlignment="Center" Margin="0,5,20,0" HorizontalAlignment="Left" 
+                          Checked="CheckFilter_Checked" Unchecked="CheckFilter_Checked" IsChecked="{Binding Active}" >
+                    <Label FlowDirection="LeftToRight" Content="Aktif" Style="{StaticResource LabelStyle}"/>
+                </CheckBox>
+            </StackPanel>
+
+        </Grid>
+
+        <DataGrid Name="GridCustomer" Style="{StaticResource MaterialDesignDataGrid}" RowHeaderStyle="{StaticResource MaterialDesignDataGridRowHeader}" ColumnHeaderStyle="{StaticResource MaterialDesignDataGridColumnHeader}"
+                  BorderThickness="0" MouseDoubleClick="GridCustomer_MouseDoubleClick" Grid.Row="1" CanUserAddRows="False" Margin="0,5,0,0" PreviewKeyDown="Grid_PreviewKeyDown" PreviewKeyUp="Grid_PreviewKeyUp"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Name" Width="*"  Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="City" Width="*" Binding="{Binding CityName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Area" Width="*" Binding="{Binding AreaName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Type" Width="*" Binding="{Binding TypeName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Phone"   Width="*" Binding="{Binding Phone}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note}" IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</local:BaseUI>

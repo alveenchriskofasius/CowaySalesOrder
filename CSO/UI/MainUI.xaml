@@ -1,0 +1,197 @@
+﻿<Window x:Class="CSO.UI.MainUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:custom="clr-namespace:UICustom"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        mc:Ignorable="mc"
+        Title="CSO" Height="768" Width="1366"
+        Loaded="Main_Loaded"
+        PreviewKeyDown="Main_PreviewKeyDown"
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow"
+        x:Name="Main">
+
+    <Window.Resources>
+
+        <Storyboard x:Key="SBShowHideMessage" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,-50" To="0" DecelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:0"/>
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0" To="0,0,0,-50" AccelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:02"/>
+        </Storyboard>
+
+        <Storyboard x:Key="SBShowMessage" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,-50" To="0" DecelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:0"/>
+        </Storyboard>
+
+        <Storyboard x:Key="SBHideMessage" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0" To="0,0,0,-50" AccelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:0"/>
+        </Storyboard>
+
+        <Storyboard x:Key="SBShowLoading" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1.0" DecelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:0"/>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PanelLoading" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="SBHideLoading" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0" AccelerationRatio=".9" Duration="0:0:0.25" BeginTime="0:0:0"/>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="PanelLoading" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.26" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="SBShowOverlay" >
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="0.2" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+        </Storyboard>
+
+        <Storyboard x:Key="SBHideOverlay" >
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.2" To="0" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.15" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Resources>
+
+            <!-- Brushes for message panel -->
+            <SolidColorBrush x:Key="ForegroundNormalBrush" Color="#FF00A452"/>
+            <SolidColorBrush x:Key="ForegroundErrorBrush" Color="#FFEC1B5B"/>
+            <SolidColorBrush x:Key="ForegroundInfoBrush" Color="#F79322"/>
+            <SolidColorBrush x:Key="BackgroundNormalBrush" Color="#FFD1F5D3"/>
+            <SolidColorBrush x:Key="BackgroundErrorBrush" Color="#FFFDCAE0"/>
+            <SolidColorBrush x:Key="BackgroundInfoBrush" Color="#FFE8D0"/>
+
+            <!-- Brushes for loading panel -->
+            <SolidColorBrush x:Key="BackgroundBrush" Color="Black" Opacity="0.75"/>
+
+            <Style x:Key="BorderMessageStyle" TargetType="{x:Type Border}">
+                <Setter Property="Label.BorderThickness" Value="2,2,0,0"></Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="0">
+                        <Setter Property="Background" Value="{StaticResource BackgroundNormalBrush}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource ForegroundNormalBrush}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="2">
+                        <Setter Property="Background" Value="{StaticResource BackgroundInfoBrush}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource ForegroundInfoBrush}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="1">
+                        <Setter Property="Background" Value="{StaticResource BackgroundErrorBrush}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource ForegroundErrorBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="LabelMessageStyle" TargetType="{x:Type Label}">
+                <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Label.VerticalContentAlignment" Value="Center"></Setter>
+                <Setter Property="Label.FontFamily" Value="Segoe UI"></Setter>
+                <Setter Property="Label.FontSize" Value="14"></Setter>
+
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="0">
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundNormalBrush}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="2">
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundInfoBrush}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="1">
+                        <Setter Property="Foreground" Value="{StaticResource ForegroundErrorBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ButtonActionStyle" TargetType="{x:Type custom:ImageButton}" BasedOn="{StaticResource MenuActionButtonStyle}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="0">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="2">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Type, ElementName=Main}" Value="1">
+                        <Setter Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Main Panel -->
+        <Rectangle Fill="{StaticResource TopMenuPanelBrush}" StrokeThickness="0" Grid.ColumnSpan="2" Height="40" VerticalAlignment="Top"/>
+
+
+        <DockPanel x:Name="PanelMain" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+
+        <Menu Grid.Column="1" Background="Transparent" VerticalAlignment="Center" Name="Main_Menu">
+            <MenuItem Header="_Master" Name="Master" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
+                <MenuItem Header="_Pelanggan" Name="Customer" Click="MenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="_Karyawan" Name="Employee" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
+                <MenuItem Header="_Absen" Name="Absent" Click="MenuItem_Click" />
+            </MenuItem>
+        </Menu>
+
+        <Rectangle Name="PanelUserName" Fill="{StaticResource CustomHighlightBrush}"/>
+
+        <Label x:Name="LabelUserName" Content="User Name " Margin="50,0,30,0" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontWeight="DemiBold" FontSize="14" Width="Auto"/>
+        <Image x:Name="ImageProfile" HorizontalAlignment="Left" Height="30" Margin="10,0" VerticalAlignment="Center" Width="30" Source="/Resource/Image/icon-user-male2-50.png"/>
+        <custom:ImageButton HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Margin="0" Style="{StaticResource FormActionButtonStyle}">
+            <i:Interaction.Behaviors>
+                <custom:DropDownButtonBehavior/>
+            </i:Interaction.Behaviors>
+            <Button.ContextMenu>
+                <ContextMenu Style="{StaticResource ContextMenuStyle}"  >
+                    <MenuItem Header="Logout" Name="Logout" Click="MenuItem_Click" Style="{StaticResource ContextMenuItemStyle}"/>
+                </ContextMenu>
+            </Button.ContextMenu>
+        </custom:ImageButton>
+
+        <!-- Message Panel -->
+        <DockPanel x:Name="PanelMessage" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="50" Width="Auto" Margin="0,0,0,-50">
+            <Border Width="Auto" Style="{StaticResource BorderMessageStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Image x:Name="MessageIcon" Width="24" Height="24" Margin="20,0,10,0" HorizontalAlignment="Left"/>
+                    <Label x:Name="LabelMessage" Style="{StaticResource LabelMessageStyle}" Margin="0,0,10,0"/>
+                    <custom:ImageButton Foreground="#FFEC1B5B" Content="Lihat Error" x:Name="ViewError" Height="20" Padding="0,0,20,0" BorderThickness="0,0,1,0"  BorderBrush="#FFEC1B5B"
+                                        Template="{StaticResource ImageButtonTemplate}" Style="{StaticResource ButtonActionStyle}" 
+                                        Click="ButtonAction_Click">
+                    </custom:ImageButton>
+
+                    <custom:ImageButton Foreground="#FFEC1B5B" Content="Tutup" x:Name="ClosePanel" Margin="-35,0,15,0"
+                                        Template="{StaticResource ImageButtonTemplate}" Style="{StaticResource ButtonActionStyle}" 
+                                        Click="ButtonAction_Click"/>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+
+        <DockPanel x:Name="PanelLoading" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="175" Opacity="0" Visibility="Collapsed">
+            <Border Width="Auto" Background="{StaticResource BackgroundBrush}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,0,0">
+                    <fa:ImageAwesome Icon="Spinner" Spin="True" Height="16" Width="16" Foreground="White"  SpinDuration="1.5"/>
+                    <Label x:Name="LabelLoading" Style="{StaticResource LabelMessageStyle}" Margin="10,0,10,0" Foreground="White" Content="Loading ..." />
+                </StackPanel>
+            </Border>
+        </DockPanel>
+
+        <Grid Grid.RowSpan="2" Grid.ColumnSpan="3" Margin="0" >
+            <Rectangle Name="PanelOverlay" Fill="#FF404A60" Visibility="Collapsed" Margin="0" ></Rectangle>
+        </Grid>
+
+    </Grid>
+</Window>

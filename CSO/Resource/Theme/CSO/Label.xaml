@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="LabelBrush" Color="#FF7787A1"/>
+
+    <!-- Label style -->
+    <Style x:Key="LabelStyle" TargetType="{x:Type Label}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Label.FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="Label.FontSize" Value="14"></Setter>
+        <Setter Property="FontWeight" Value="DemiBold" />
+        <Setter Property="Label.Foreground" Value="{StaticResource MainTextBrush}"></Setter>
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
+
+</ResourceDictionary>

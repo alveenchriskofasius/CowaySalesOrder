@@ -1,0 +1,315 @@
+﻿<ResourceDictionary x:Class="CSO.Resource.Theme.CSO.TextBox"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brushes for textbox -->
+    <SolidColorBrush x:Key="TextBoxFocusBrush" Color="#FFAEBDD4"/>
+    <SolidColorBrush x:Key="TextBoxNormalBrush" Color="#FFE8F0FA"/>
+    <SolidColorBrush x:Key="TextBoxNormalTextBrush" Color="#FF7787A1"/>
+    <SolidColorBrush x:Key="TextBoxFocusTextBrush" Color="White"/>
+    <SolidColorBrush x:Key="TextBoxLoginFocusBrush" Color="#d7b740"/>
+    <SolidColorBrush x:Key="TextBoxLoginBrush" Color="#c1a640"/>
+
+
+    <!-- TextBox Login style -->
+    <Style x:Key="TextBoxLoginStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextBox.FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="TextBox.FontSize" Value="14"></Setter>
+        <Setter Property="TextBox.BorderThickness" Value="0"></Setter>
+        <Setter Property="TextBox.VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="TextBox.CaretBrush" Value="{StaticResource MainTextBrush}"/>
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBaseBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="{StaticResource LightBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainTextBrush}"/>
+        <EventSetter Event="PreviewKeyDown" Handler="Global_PreviewKeyDown"/>
+        <EventSetter Event="GotFocus" Handler="TextBox_GotFocus"/>
+        <EventSetter Event="PreviewMouseDown" Handler="TextBox_PreviewMouseDown"/>
+        <EventSetter Event="PreviewMouseDoubleClick" Handler="TextBox_PreviewMouseDoubleClick"/>
+        <!--<EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border 
+                          Name="Border"
+                          Padding="2"
+                          Background="{StaticResource LightBrush}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}" >
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsReadOnly" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TextBoxLoginBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TextBoxLoginBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumBaseBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DarkBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource LightBaseBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource MainTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- TextBox style -->
+    <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextBox.FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="TextBox.FontSize" Value="14"></Setter>
+        <Setter Property="TextBox.BorderThickness" Value="0"></Setter>
+        <Setter Property="TextBox.VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="TextBox.CaretBrush" Value="{StaticResource MainTextBrush}"/>
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="BorderBrush" Value="{StaticResource DarkBaseBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="{StaticResource LightBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainTextBrush}"/>
+        <EventSetter Event="PreviewKeyDown" Handler="Global_PreviewKeyDown"/>
+        <EventSetter Event="GotFocus" Handler="TextBox_GotFocus"/>
+        <EventSetter Event="PreviewMouseDown" Handler="TextBox_PreviewMouseDown"/>
+        <EventSetter Event="PreviewMouseDoubleClick" Handler="TextBox_PreviewMouseDoubleClick"/>
+        <!--<EventSetter Event="TextChanged" Handler="TextBox_TextChanged"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border 
+                          Name="Border"
+                          Padding="2"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}" >
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsReadOnly" Value="False" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumMainBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource FocusBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumBaseBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DarkBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource LightBaseBrush}"/>
+                <Setter Property="Foreground" Value="{StaticResource MainTextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBoxReadOnlyStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Margin" Value="0,0,5,5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
+    <Style x:Key="TextBoxReadOnlyEnabledStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Margin" Value="0,0,5,5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
+    <!-- TextBox Hidden style -->
+    <Style x:Key="TextHiddenBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="TextBox.BorderThickness" Value="0"></Setter>
+        <Setter Property="TextBox.CaretBrush" Value="Transparent"/>
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Height" Value="30" />
+    </Style>
+
+    <!-- PasswordBox Login style -->
+    <Style x:Key="PasswordBoxLoginStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="PasswordBox.FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="PasswordBox.FontSize" Value="14"></Setter>
+        <Setter Property="PasswordBox.CaretBrush" Value="White"/>
+        <Setter Property="PasswordBox.BorderThickness" Value="0"></Setter>
+        <Setter Property="PasswordBox.VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Height" Value="30" />
+        <!--<EventSetter Event="PreviewKeyDown" Handler="Global_PreviewKeyDown"/>-->
+        <EventSetter Event="GotFocus" Handler="PasswordBox_GotFocus"/>
+        <EventSetter Event="PreviewMouseDown" Handler="PasswordBox_PreviewMouseDown"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border 
+                          Name="Border"
+                          Padding="2"
+                          Background="{StaticResource LightBrush}"
+                          BorderBrush="{StaticResource DarkBaseBrush}"
+                          BorderThickness="2" >
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TextBoxLoginBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource TextBoxLoginBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumBaseBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DarkBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- PasswordBox style -->
+    <Style x:Key="PasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="PasswordBox.FontFamily" Value="Segoe UI"></Setter>
+        <Setter Property="PasswordBox.FontSize" Value="14"></Setter>
+        <Setter Property="PasswordBox.CaretBrush" Value="White"/>
+        <Setter Property="PasswordBox.BorderThickness" Value="0"></Setter>
+        <Setter Property="PasswordBox.VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Padding" Value="5,0,5,0" />
+        <Setter Property="Height" Value="30" />
+        <!--<EventSetter Event="PreviewKeyDown" Handler="Global_PreviewKeyDown"/>-->
+        <EventSetter Event="GotFocus" Handler="PasswordBox_GotFocus"/>
+        <EventSetter Event="PreviewMouseDown" Handler="PasswordBox_PreviewMouseDown"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border 
+                          Name="Border"
+                          Padding="2"
+                          Background="{StaticResource LightBrush}"
+                          BorderBrush="{StaticResource DarkBaseBrush}"
+                          BorderThickness="2" >
+                        <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumMainBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource FocusBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MediumBaseBrush}" />
+                            <Setter Property="Foreground" Value="{StaticResource DarkBrush}" />
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBaseBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Error Tool Tip Style -->
+    <ControlTemplate x:Key="ErrorToolTip" TargetType="{x:Type TextBox}">
+        <Border
+            Name="Border"
+                Width="Auto"
+            Background="Red"
+                BorderThickness="2"
+                BorderBrush="Red"
+            CornerRadius="5, 5, 5, 5" >
+            <Grid>
+                <ContentPresenter
+                Margin="{TemplateBinding Margin}"
+                VerticalAlignment="Center"
+                TextBlock.FontFamily="Segoe UI"
+                TextBlock.FontSize="12"
+                TextBlock.Foreground="Red"                
+                Visibility="Visible"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- TextBoxErrorAdorner Template -->
+    <ControlTemplate x:Key="TextBoxErrorAdorner">
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Grid Width="30" Height="30" Margin="0">
+                    <Ellipse Width="15" Height="15" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center"></Ellipse>
+                    <Label Background="Transparent" Foreground="White" Content="!" FontFamily="Segoe UI" FontWeight="Heavy" FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                    <!--<TextBlock Foreground="White" FontFamily="Segoe UI" FontWeight="Heavy" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" ToolTip="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">!</TextBlock>-->
+                </Grid>
+                <!--Text="{Binding ElementName=ErrorAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"-->
+                <!--<TextBox Padding="5" Width="Auto" Template="{StaticResource ErrorToolTip}" Text="Test"  IsReadOnly="True">
+                    </TextBox>-->
+            </StackPanel>
+            <AdornedElementPlaceholder x:Name="ErrorAdorner" ></AdornedElementPlaceholder>
+        </DockPanel>
+    </ControlTemplate>
+
+</ResourceDictionary>

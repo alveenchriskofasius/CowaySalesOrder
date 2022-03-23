@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{776A5445-C83E-466D-B946-B9B84A61914D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CSO</RootNamespace>
+    <AssemblyName>CSO</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.0.5.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.0.5\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.4.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.4.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Proxy\AreaProxy.cs" />
+    <Compile Include="Proxy\CustomerProxy.cs" />
+    <Compile Include="Proxy\LookupProxy.cs" />
+    <Compile Include="Proxy\RoleProxy.cs" />
+    <Compile Include="Proxy\UserProxy.cs" />
+    <Compile Include="Resource\Theme\CSO\ComboBox.xaml.cs">
+      <DependentUpon>ComboBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\Theme\CSO\DataGrid.xaml.cs">
+      <DependentUpon>DataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\Theme\CSO\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resource\Theme\CSO\TextBox.xaml.cs">
+      <DependentUpon>TextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\CustomCommand.cs" />
+    <Compile Include="Tool\DBHelper.cs" />
+    <Compile Include="Tool\UICustom.cs" />
+    <Compile Include="Tool\UIHelper.cs" />
+    <Compile Include="UI\BaseUI.cs" />
+    <Compile Include="UI\CustomerFormUI.xaml.cs">
+      <DependentUpon>CustomerFormUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerGridUI.xaml.cs">
+      <DependentUpon>CustomerGridUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CustomerUI.xaml.cs">
+      <DependentUpon>CustomerUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\LoginUI.xaml.cs">
+      <DependentUpon>LoginUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MainUI.xaml.cs">
+      <DependentUpon>MainUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PopupUI.xaml.cs">
+      <DependentUpon>PopupUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VO\AreaVO.cs" />
+    <Compile Include="VO\BaseHeaderVO.cs" />
+    <Compile Include="VO\BaseMasterVO.cs" />
+    <Compile Include="VO\BaseVO.cs" />
+    <Compile Include="VO\CustomerVO.cs" />
+    <Compile Include="VO\FilterVO.cs" />
+    <Compile Include="VO\LookupVO.cs" />
+    <Compile Include="VO\RoleVO.cs" />
+    <Compile Include="VO\UserRightsVO.cs" />
+    <Compile Include="VO\UserVO.cs" />
+    <Compile Include="VO\ZIPCodeVO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Framework\Prism\Mvvm\BindableBase.cs" />
+    <Compile Include="Framework\Prism\Mvvm\PropertySupport.cs" />
+    <Compile Include="Framework\Prism\Properties\AssemblyInfo.cs" />
+    <Compile Include="Framework\Prism\Properties\Resources.Designer.cs" />
+    <Compile Include="Framework\WindowsInput\IInputDeviceStateAdaptor.cs" />
+    <Compile Include="Framework\WindowsInput\IInputMessageDispatcher.cs" />
+    <Compile Include="Framework\WindowsInput\IInputSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\IKeyboardSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\IMouseSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\InputBuilder.cs" />
+    <Compile Include="Framework\WindowsInput\InputSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\KeyboardSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\MouseButton.cs" />
+    <Compile Include="Framework\WindowsInput\MouseSimulator.cs" />
+    <Compile Include="Framework\WindowsInput\Native\HARDWAREINPUT.cs" />
+    <Compile Include="Framework\WindowsInput\Native\INPUT.cs" />
+    <Compile Include="Framework\WindowsInput\Native\InputType.cs" />
+    <Compile Include="Framework\WindowsInput\Native\KEYBDINPUT.cs" />
+    <Compile Include="Framework\WindowsInput\Native\KeyboardFlag.cs" />
+    <Compile Include="Framework\WindowsInput\Native\MouseFlag.cs" />
+    <Compile Include="Framework\WindowsInput\Native\MOUSEINPUT.cs" />
+    <Compile Include="Framework\WindowsInput\Native\MOUSEKEYBDHARDWAREINPUT.cs" />
+    <Compile Include="Framework\WindowsInput\Native\NativeMethods.cs" />
+    <Compile Include="Framework\WindowsInput\Native\VirtualKeyCode.cs" />
+    <Compile Include="Framework\WindowsInput\WindowsInputDeviceStateAdaptor.cs" />
+    <Compile Include="Framework\WindowsInput\WindowsInputMessageDispatcher.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Image\icon-add-user-32.png" />
+    <Resource Include="Resource\Image\icon-add-user-blue-32.png" />
+    <Resource Include="Resource\Image\icon-add-user-hover-32.png" />
+    <Resource Include="Resource\Image\icon-checkmark-32.png" />
+    <Resource Include="Resource\Image\icon-clear-filters-blue-32.png" />
+    <Resource Include="Resource\Image\icon-clear-filters-hover-32.png" />
+    <Resource Include="Resource\Image\icon-documents-blue-32.png" />
+    <Resource Include="Resource\Image\icon-documents-hover-32.png" />
+    <Resource Include="Resource\Image\icon-empty-box-blue-32.png" />
+    <Resource Include="Resource\Image\icon-empty-box-disabled-32.png" />
+    <Resource Include="Resource\Image\icon-empty-box-hover-32.png" />
+    <Resource Include="Resource\Image\icon-file-blue-32.png" />
+    <Resource Include="Resource\Image\icon-file-hover-32.png" />
+    <Resource Include="Resource\Image\icon-info-32.png" />
+    <Resource Include="Resource\Image\icon-refresh-blue-32.png" />
+    <Resource Include="Resource\Image\icon-refresh-hover-32.png" />
+    <Resource Include="Resource\Image\icon-search-blue-32.png" />
+    <Resource Include="Resource\Image\icon-search-hover-32.png" />
+    <Resource Include="Resource\Image\icon-spawn-black-32.png" />
+    <Resource Include="Resource\Image\icon-spawn-grey-32.png" />
+    <Resource Include="Resource\Image\icon-spawn-hover-32.png" />
+    <Resource Include="Resource\Image\icon-spawn-white-32.png" />
+    <Resource Include="Resource\Image\icon-tick-box-blue-32.png" />
+    <Resource Include="Resource\Image\icon-tick-box-disabled-32.png" />
+    <Resource Include="Resource\Image\icon-tick-box-hover-32.png" />
+    <Resource Include="Resource\Image\icon-trash-32.png" />
+    <Resource Include="Resource\Image\icon-trash-blue-32.png" />
+    <Resource Include="Resource\Image\icon-trash-disabled-32.png" />
+    <Resource Include="Resource\Image\icon-trash-hover-32.png" />
+    <Resource Include="Resource\Image\icon-user-female2-100.png" />
+    <Resource Include="Resource\Image\icon-user-female2-50.png" />
+    <Resource Include="Resource\Image\icon-user-male2-100.png" />
+    <Resource Include="Resource\Image\icon-user-male2-50.png" />
+    <Resource Include="Resource\Image\Keys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resource\Theme\CSO\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\ComboBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\DataGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\ImageButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\Menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\CustomerFormUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\CustomerGridUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\CustomerUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\LoginUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\MainUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\PopupUI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.4.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

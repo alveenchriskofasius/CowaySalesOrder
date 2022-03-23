@@ -1,0 +1,76 @@
+﻿<Application x:Class="CSO.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="UI/LoginUI.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resource/Theme/CSO/Common.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/Label.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/TextBox.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/TextBlock.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/Menu.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/Button.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/ImageButton.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/DataGrid.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/ComboBox.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <Style TargetType="{x:Type UserControl}">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Storyboard x:Key="SBShowBottom" >
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,768,0,-768" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+            </Storyboard>
+
+            <Storyboard x:Key="SBHideBottom" >
+                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,768,0,-768" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.15" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="SBPanelFadeIn" >
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="1366,0,-1366,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+            </Storyboard>
+
+            <Storyboard x:Key="SBPanelFadeOut" >
+                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="1366,0,-1366,0" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1" To="0" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.15" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+            <Storyboard x:Key="SBOverlayFadeIn" >
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="0.4" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+            </Storyboard>
+
+            <Storyboard x:Key="SBOverlayFadeOut" >
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.4" To="0" AccelerationRatio=".9" Duration="0:0:0.15" BeginTime="0:0:0"/>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.15" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

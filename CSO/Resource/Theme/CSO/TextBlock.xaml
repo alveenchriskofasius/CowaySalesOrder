@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brushes for textBlock -->
+    <SolidColorBrush x:Key="TextBlockPlaceholderBrush" Color="#FFA5B7D2"/>
+
+    <!-- TextBlock Placeholder Text style -->
+    <Style x:Key="TextBlockPlaceholderStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource DarkBaseBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="TextBlock.FontFamily" Value="Segoe UI" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource DarkBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="TextBlock.FontFamily" Value="Segoe UI" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="TextBlock.FontWeight" Value="DemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+
+
+</ResourceDictionary>
