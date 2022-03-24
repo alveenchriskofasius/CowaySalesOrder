@@ -134,15 +134,15 @@ namespace CSO.Proxy
                 List<OrderVO> customers = new List<OrderVO>();
 
                 object[] parameters = {
-                        "@Name", filter.FullName,
-                        "@ProvinceID", filter.ProvinceID,
-                        "@CityID", filter.CityID,
-                        "@AreaID", filter.AreaID,
-                        "@TypeID", filter.TraderTypeID,
+                        "@No", filter.FullName,
+                        "@DateFrom", filter.DateFrom,
+                        "@DateTo", filter.DateTo,
+                        "@StatusID", filter.StatusID,
+                        "@CustomerID", filter.CustomerID,
                         "@Active", filter.Active
                 };
 
-                DataSet result = DBHelper.ExecuteProcedure("uspOrderListGet", parameters);
+                DataSet result = DBHelper.ExecuteProcedure("uspOrderListGet");
 
                 foreach (DataRow dataRow in result.Tables[0].Rows)
                 {

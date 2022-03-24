@@ -139,8 +139,8 @@ namespace CSO.VO
             }
         }
 
-        private DateTime _updatedOn = DateTime.Now;
-        public DateTime UpdatedOn
+        private string _updatedOn = "";
+        public string UpdatedOn
         {
             get { return _updatedOn; }
             set

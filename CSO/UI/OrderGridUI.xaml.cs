@@ -30,20 +30,7 @@ namespace CSO.UI
             InitializeComponent();
         }
         DispatcherTimer _typingTimer;
-        private void TextName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (_typingTimer == null)
-            {
-                _typingTimer = new DispatcherTimer();
-                _typingTimer.Interval = TimeSpan.FromMilliseconds(500);
 
-                _typingTimer.Tick += new EventHandler(this.HandleTypingTimerTimeout);
-            }
-
-            _typingTimer.Stop(); // Resets the timer
-            _typingTimer.Start();
-
-        }
         private void HandleTypingTimerTimeout(object sender, EventArgs e)
         {
             DispatcherTimer timer = sender as DispatcherTimer;
@@ -61,6 +48,19 @@ namespace CSO.UI
 
             // The timer must be stopped! We want to act only once per keystroke.
             timer.Stop();
+        }
+        private void TextNo_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_typingTimer == null)
+            {
+                _typingTimer = new DispatcherTimer();
+                _typingTimer.Interval = TimeSpan.FromMilliseconds(500);
+
+                _typingTimer.Tick += new EventHandler(this.HandleTypingTimerTimeout);
+            }
+
+            _typingTimer.Stop(); // Resets the timer
+            _typingTimer.Start();
         }
         private void ButtonAction_Click(object sender, RoutedEventArgs e)
         {
@@ -113,5 +113,7 @@ namespace CSO.UI
             DataContext = _filter;
             FillGrid();
         }
+
+
     }
 }

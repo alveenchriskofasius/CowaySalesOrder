@@ -34,6 +34,15 @@ namespace CSO.VO
                 SetProperty(ref _active, value);
             }
         }
+        private int _statusID = 0;
+        public int StatusID
+        {
+            get { return _statusID; }
+            set
+            {
+                SetProperty(ref _statusID, value);
+            }
+        }
         private int _provinceID = 0;
         public int ProvinceID
         {
@@ -63,13 +72,22 @@ namespace CSO.VO
             }
         }
 
-        private int _tradertypeID = 0;
-        public int TraderTypeID
+        private int _customerID = 0;
+        public int CustomerID
         {
-            get { return _tradertypeID; }
+            get { return _customerID; }
             set
             {
-                SetProperty(ref _tradertypeID, value);
+                SetProperty(ref _customerID, value);
+            }
+        }
+        private int _customerType = 0;
+        public int CustomerType
+        {
+            get { return _customerType; }
+            set
+            {
+                SetProperty(ref _customerType, value);
             }
         }
         private DateTime _date = DateTime.Now;
@@ -81,7 +99,24 @@ namespace CSO.VO
                 SetProperty(ref _date, value);
             }
         }
-
+        private DateTime _dateFrom = DateTime.Now;
+        public DateTime DateFrom
+        {
+            get { return _dateFrom; }
+            set
+            {
+                SetProperty(ref _dateFrom, value);
+            }
+        }
+        private DateTime _dateTo = DateTime.Now;
+        public DateTime DateTo
+        {
+            get { return _dateTo; }
+            set
+            {
+                SetProperty(ref _dateTo, value);
+            }
+        }
         #endregion
 
         public FilterVO()

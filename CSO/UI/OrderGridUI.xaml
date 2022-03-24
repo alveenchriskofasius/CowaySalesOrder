@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSO.UI" xmlns:custom="clr-namespace:UICustom"
               mc:Ignorable="d" 
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
               Loaded="BaseUI_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White">
@@ -29,29 +30,38 @@
                         NormalImage="/Resource/Image/icon-clear-filters-hover-32.png"
                         HoverImage="/Resource/Image/icon-clear-filters-blue-32.png" Click="ButtonAction_Click"/>
         </StackPanel>
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextName" Style="{StaticResource MaterialDesignTextBox}" HorizontalAlignment="Left" Width="150"  Margin="5"
-                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextName_TextChanged"/>
-            <TextBlock Text="-- nama --" Style="{StaticResource TextBlockPlaceholderStyle}" HorizontalAlignment="Left" Margin="40,0,0,0" Tag="{Binding Text, ElementName=TextName}"/>
-            <ComboBox Name="ComboProductType" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding ReligionID,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
-            <DatePicker  Margin="25,0,0,0"  Name="DatePicker" Width="135" VerticalAlignment="Center" IsTabStop="False" Style="{StaticResource MaterialDesignDatePicker}"
-                        SelectedDate="{Binding Path=Date, UpdateSourceTrigger=PropertyChanged}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBox x:Name="TextNo" Style="{StaticResource MaterialDesignTextBox}" HorizontalAlignment="Left" Width="150"  Margin="5"
+                         Text="{Binding No, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="No. Pemesanan" TextChanged="TextNo_TextChanged"/>
+            <ComboBox Name="ComboProductType" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding ProductTypeID,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
 
-        </Grid>
+            <ComboBox Name="ComboCustomer" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding CustomerID,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
+            <DatePicker  Margin="25,0,0,0"  Name="DateFrom" Width="135" VerticalAlignment="Center" IsTabStop="False" Style="{StaticResource MaterialDesignDatePicker}"
+                        SelectedDate="{Binding Path=DateFrom, UpdateSourceTrigger=PropertyChanged}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <DatePicker  Margin="25,0,0,0"  Name="DateTo" Width="135" VerticalAlignment="Center" IsTabStop="False" Style="{StaticResource MaterialDesignDatePicker}"
+                        SelectedDate="{Binding Path=DateTo, UpdateSourceTrigger=PropertyChanged}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <ComboBox Name="ComboStatus" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding StatusID,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
+
+        </StackPanel>
 
         <DataGrid x:Name="GridOrder" Grid.Row="4" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nama" Binding="{Binding FullName}"/>
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}"/>
-                <DataGridTextColumn Header="Jenis Kelamin" Binding="{Binding Gender}"/>
-                <DataGridCheckBoxColumn Header="Aktif" Binding="{Binding Active}"/>
+                <DataGridTextColumn Header="No. Pemesanan" Binding="{Binding No}"/>
+                <DataGridTextColumn Header="Tanggal Transaksi" Binding="{Binding Date,StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="PIC" Binding="{Binding PersonInChargeName}"/>
+                <DataGridTextColumn Header="Tipe Pembayaran" Binding="{Binding PaymentTypeName}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn Header="Nama Paket" Binding="{Binding ServicePackageName}"/>
+                <DataGridTextColumn Header="Tanggal Dibuat" Binding="{Binding CreatedOn,StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="Dibuat Oleh" Binding="{Binding CreatedByName}"/>
+                <DataGridTextColumn Header="Tanggal Diupdate" Binding="{Binding UpdatedOn,StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="Diupdate Oleh" Binding="{Binding UpdatedByName}"/>
+                <DataGridTextColumn Header="Tanggal Diverifikasi" Binding="{Binding VerifiedOn,StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="Diverifikasi Oleh" Binding="{Binding VerifiedByName}"/>
+                <DataGridTextColumn Header="Tanggal Disetujui" Binding="{Binding ApprovedOn,StringFormat=dd-MM-yyyy}"/>
+                <DataGridTextColumn Header="Disetujui Oleh" Binding="{Binding ApprovedByName}"/>
+
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

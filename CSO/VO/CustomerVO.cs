@@ -203,7 +203,7 @@ namespace CSO.VO
                 case "Name":
                     if (string.IsNullOrEmpty(Name))
                     {
-                        result = "Customer Name required";
+                        result = "Nama Pelanggan wajib diisi";
                     }
 
                     break;
@@ -211,14 +211,14 @@ namespace CSO.VO
                 case "CityID":
                     if (CityID == 0)
                     {
-                        result = "City required";
+                        result = "Kota wajib diisi";
                     }
 
                     break;
                 case "AreaID":
                     if (AreaID == 0)
                     {
-                        result = "Area required";
+                        result = "Area wajib diisi";
                     }
 
                     break;
@@ -226,7 +226,7 @@ namespace CSO.VO
                 case "TypeID":
                     if (TypeID == 0)
                     {
-                        result = "Customer type required  ";
+                        result = "Tipe Customer wajib diisi  ";
                     }
 
                     break;
@@ -234,7 +234,7 @@ namespace CSO.VO
                 case "Address":
                     if (string.IsNullOrEmpty(Address))
                     {
-                        result = "Address required";
+                        result = "Alamat wajib diisi";
                     }
 
                     break;
@@ -242,31 +242,31 @@ namespace CSO.VO
                 case "Phone":
                     if (string.IsNullOrEmpty(Phone))
                     {
-                        result = "Phone number required";
+                        result = "No. HP wajib diisi";
                     }
                     else if (Phone.Length > 12)
                     {
-                        result = "Maximum of Phone number is 12 digit";
+                        result = "Maksimal No. HP 12 digit";
                     }
                     else if (Phone.Length < 10)
                     {
-                        result = "Minimum of PHone number is 10 digit";
+                        result = "Minimal No. hp HP digit";
                     }
                     break;
                 case "CustomerID":
                     if (string.IsNullOrEmpty(CustomerID))
                     {
-                        result = "CustomerID required";
+                        result = "KTP wajib diisi";
                     }
                     else if (CustomerID.Length < 16 || CustomerID.Length > 16)
                     {
-                        result = "CustomerID must be 16 digit";
+                        result = "KTP harus 16 digit";
                     }
                     break;
                 case "PlaceDOB":
                     if (string.IsNullOrEmpty(PlaceDOB))
                     {
-                        result = "Place Date of Birth required";
+                        result = "Tempat lahir wajib diisi";
                     }
                     break;
                 case "Date":
@@ -275,20 +275,20 @@ namespace CSO.VO
                     DateTime dt_18 = Date.AddYears(18);
                     if (dt_18.Date >= dt_now.Date)
                     {
-                        result = "Age minimum is 18 years";
+                        result = "Umum minimal 18 tahun";
                     }
                     break;
                 case "Gender":
                     if (string.IsNullOrEmpty(Gender))
                     {
-                        result = "Gender required";
+                        result = "Jenis kelamin wajib diisi";
                     }
                     break;
                 case "Email":
                     if (!Regex.IsMatch(Email, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase))
-                        result = "Email is not valid";
+                        result = "Email tidak valid";
                     if (string.IsNullOrEmpty(Email))
-                        result = "Email required";
+                        result = "Email wajib diisi";
                     break;
             }
             return result;

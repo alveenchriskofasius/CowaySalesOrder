@@ -98,7 +98,7 @@ namespace CSO.Proxy
                         "@ProvinceID", filter.ProvinceID,
                         "@CityID", filter.CityID,
                         "@AreaID", filter.AreaID,
-                        "@TypeID", filter.TraderTypeID,
+                        "@TypeID", filter.CustomerID,
                         "@Active", filter.Active
                 };
 

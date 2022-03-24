@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CSO.UI" xmlns:UICustom="clr-namespace:UICustom"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Loaded="BaseUI_Loaded"
              d:DesignHeight="1080" d:DesignWidth="1920">
@@ -53,8 +54,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBox x:Name="TextName" Style="{StaticResource MaterialDesignTextBox}" Width="150"  Margin="10,0,20,0" VerticalAlignment="Center"
-                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextName_TextChanged"/>
-                <TextBlock Text="-- nama --" Style="{StaticResource TextBlockPlaceholderStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-150,0,0,0" Tag="{Binding Text, ElementName=textName}"/>
+                         Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nama" TextChanged="TextName_TextChanged"/>
                 <ComboBox x:Name="ComboType" HorizontalAlignment="Left" Margin="10,5,20,0" VerticalAlignment="Top" Width="150" 
                           Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="ComboBox_SelectionChanged"
                           SelectedValue="{Binding TraderTypeID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"  />
@@ -82,11 +82,11 @@
                   BorderThickness="0" MouseDoubleClick="GridCustomer_MouseDoubleClick" Grid.Row="1" CanUserAddRows="False" Margin="0,5,0,0" PreviewKeyDown="Grid_PreviewKeyDown" PreviewKeyUp="Grid_PreviewKeyUp"
                   AutoGenerateColumns="False">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Name" Width="*"  Binding="{Binding Name}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="City" Width="*" Binding="{Binding CityName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Nama" Width="*"  Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Kota" Width="*" Binding="{Binding CityName}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Area" Width="*" Binding="{Binding AreaName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Type" Width="*" Binding="{Binding TypeName}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Phone"   Width="*" Binding="{Binding Phone}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Tipe" Width="*" Binding="{Binding TypeName}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="No. HP"   Width="*" Binding="{Binding Phone}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Note" Width="*" Binding="{Binding Note}" IsReadOnly="True"/>
 
             </DataGrid.Columns>

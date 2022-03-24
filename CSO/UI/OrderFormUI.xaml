@@ -51,8 +51,7 @@
                 <custom:ImageButton Margin="10,0"
                     Content="Cari" x:Name="ButtonSearch" Style="{StaticResource FormActionButtonStyle}" Click="ButtonAction_Click"
                     NormalImage="/Resource/Image/icon-search-hover-32.png" 
-                    HoverImage="/Resource/Image/icon-search-blue-32.png" 
-                    DisabledImage="/Resource/Image/icon-search-disabled-32.png"/>
+                    HoverImage="/Resource/Image/icon-search-blue-32.png"/>
 
                 <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource LabelBrush}" Margin="0,13"/>
 

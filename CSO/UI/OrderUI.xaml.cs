@@ -43,6 +43,7 @@ namespace CSO.UI
             {
                 ToggleSearchPanel();
             }
+            OrderForm.Restore();
         }
 
         #region Helper
@@ -65,6 +66,7 @@ namespace CSO.UI
                 animatePanel.Begin(PanelSearch);
                 animatePanel = Application.Current.Resources["SBOverlayFadeOut"] as Storyboard;
                 animatePanel.Begin(PanelOverlay);
+                
             }
         }
 

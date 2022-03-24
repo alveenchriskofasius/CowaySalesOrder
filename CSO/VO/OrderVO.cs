@@ -48,6 +48,18 @@ namespace CSO.VO
                 SetProperty(ref _personInChargeID, value);
             }
         }
+        private string _personInChargeName = "";
+        public string PersonInChargeName
+        {
+            get { return _personInChargeName; }
+            set
+            {
+                SetProperty(ref _personInChargeName, value);
+            }
+        }
+
+
+
         private int _customerID = 0;
         public int CustomerID
         {
@@ -65,6 +77,15 @@ namespace CSO.VO
             set
             {
                 SetProperty(ref _paymentTypeID, value);
+            }
+        }
+        private string _paymentTypeName = "";
+        public string PaymentTypeName
+        {
+            get { return _paymentTypeName; }
+            set
+            {
+                SetProperty(ref _paymentTypeName, value);
             }
         }
 
@@ -116,6 +137,17 @@ namespace CSO.VO
                 SetProperty(ref _servicePackageID, value);
             }
         }
+
+        private string _servicePackageName = "";
+        public string ServicePackageName
+        {
+            get { return _servicePackageName; }
+            set
+            {
+                SetProperty(ref _servicePackageName, value);
+            }
+        }
+
         private decimal _grandTotal = 0;
         public decimal GrandTotal
         {
@@ -178,6 +210,22 @@ namespace CSO.VO
         public OrderVO(DataRow dataRow)
         {
             SetValue(dataRow);
+        }
+        private OrderVO _temp;
+        public void Validate()
+        {
+            // save to temp
+            _temp = new OrderVO(this);
+
+            // dummy values to validate all data
+            PersonInChargeID = CustomerID = ServicePackageID = PaymentTypeID = -1;
+            InstallAddress = "InstallAddress";
+        }
+
+        public void Restore()
+        {
+            // restore to original values
+            SetValue(_temp);
         }
         public override string GetError(string columnName)
         {

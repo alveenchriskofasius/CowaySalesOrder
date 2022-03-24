@@ -38,6 +38,11 @@ namespace CSO.UI
             {
                 handler(this, e);
             }
+            _order.Validate();
+        }
+        public void Restore()
+        {
+            _order.Restore();
         }
         #region Event declarations
         #endregion
@@ -88,7 +93,7 @@ namespace CSO.UI
                 order = new OrderVO();
             }
 
-            _orderProduct.SetValue(order);
+            _order.SetValue(order);
 
             GridProduct.ItemsSource = _order.Products;
         }
@@ -97,12 +102,12 @@ namespace CSO.UI
             ComboBox combo = sender as ComboBox;
             CustomerVO customer = ComboCustomer.SelectedItem as CustomerVO;
             PromotionVO promotion = ComboPromotion.SelectedItem as PromotionVO;
+            ProductVO product = ComboProduct.SelectedItem as ProductVO;
 
             switch (combo.Name)
             {
 
                 case "ComboProduct":
-                    ProductVO product = ComboProduct.SelectedItem as ProductVO;
                     if (product != null)
                     {
                         _orderProduct.ProductID = product.ID;
@@ -110,34 +115,42 @@ namespace CSO.UI
                         _orderProduct.Amount = product.Price;
                         _orderProduct.DiscountAmount = product.Discount;
                         _orderProduct.ProductTypeID = product.ProductTypeID;
+                  
                     }
                     break;
                 case "ComboCustomer":
                     List<LookupVO> types = ComboPaymentType.ItemsSource as List<LookupVO>;
+                    if (customer == null) return;
                     LookupVO type = types.FirstOrDefault(x => x.ID == customer.TypeID);
                     ComboPaymentType.SelectedItem = type;
-                    _order.Products = Promotion(true, customer.TypeID, customer.TypeID == 1 ? 2000000 : 1000000);
+                    _order.Products = Promotion(customer.TypeID, customer.TypeID == 1 ? 2000000 : 1000000);
                     break;
                 case "ComboPromotion":
 
                     if (promotion != null && customer != null)
                     {
-                        _order.Products = Promotion(true, customer.TypeID, customer.TypeID == 1 ? 2000000 : 1000000);
+                        _order.Products = Promotion(customer.TypeID, customer.TypeID == 1 ? 2000000 : 1000000);
                     }
                     break;
                 case "ComboServicePackage":
                     //clear products in the grid 
                     GridProduct.ItemsSource = _order.Products = new ObservableCollection<OrderProductVO>();
                     break;
+
+            }
+            if(ComboProduct.SelectedItem != null)
+            {
+                List<ProductVO> products = ComboProduct.ItemsSource as List<ProductVO>;
+                product.Discount = _orderProduct.DiscountAmount = _order.PromotionID != 0 && _order.IsDiscounted ? products.Where(x => x.ID == product.ID).FirstOrDefault().Discount : 0;
             }
             ComboProduct.IsEnabled = TextPcs.IsEnabled = CheckBoxPromotion.IsEnabled = _order.CustomerID != 0 && _order.ServicePackageID != 0;
         }
-        private ObservableCollection<OrderProductVO> Promotion(bool isPromotion = false, int typeID = 0, decimal discounts = 0)
+        private ObservableCollection<OrderProductVO> Promotion(int typeID = 0, decimal discounts = 0)
         {
             ObservableCollection<OrderProductVO> gridProducts = GridProduct.ItemsSource as ObservableCollection<OrderProductVO>;
             List<ProductVO> products = ComboProduct.ItemsSource as List<ProductVO>;
 
-            if (isPromotion)
+            if (_order.IsDiscounted && _order.PromotionID != 0)
             {
                 foreach (OrderProductVO orderProduct in GridProduct.ItemsSource)
                 {
@@ -270,7 +283,6 @@ namespace CSO.UI
                     break;
 
                 case "ButtonSearch":
-                    ButtonSearch.IsEnabled = false;
                     OnSearchClicked(new EventArgs());
                     break;
 
@@ -331,7 +343,7 @@ namespace CSO.UI
             if (sender == CheckBoxPromotion)
             {
 
-                if (!_order.IsDiscounted) { _order.PromotionID = 0; ComboPromotion.IsEnabled = false; _order.Products = Promotion(false); }
+                if (!_order.IsDiscounted) { _order.PromotionID = 0; ComboPromotion.IsEnabled = false; _order.Products = Promotion(); }
                 if (_order.IsDiscounted) { ComboPromotion.IsEnabled = true; }
             }
             if (sender == CheckBoxAddress)

@@ -133,7 +133,7 @@
                         Text="{Binding Path= Email,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=true,NotifyOnValidationError=true}" HorizontalAlignment="Left" 
                         />
 
-                <Label Content="Telepon" HorizontalAlignment="Left"   Margin="5" Style="{StaticResource LabelStyle}" Grid.Row="3"  VerticalAlignment="Top"/>
+                <Label Content="No. HP" HorizontalAlignment="Left"   Margin="5" Style="{StaticResource LabelStyle}" Grid.Row="3"  VerticalAlignment="Top"/>
                 <TextBox Width="200"  Grid.Row="3" Grid.Column="1" Margin="5,12,0,0"
                             Style="{StaticResource MaterialDesignTextBox}" 
                             Text="{Binding Path= Phone,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}" HorizontalAlignment="Left" 
