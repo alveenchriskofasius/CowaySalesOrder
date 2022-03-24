@@ -149,35 +149,46 @@ namespace CSO.VO
             }
         }
 
-        private string _validatedOn = "";
-        public string ValidatedOn
+        private string _verifiedOn = "";
+        public string VerifiedOn
         {
-            get { return _validatedOn; }
+            get { return _verifiedOn; }
             set
             {
-                SetProperty(ref _validatedOn, value);
+                SetProperty(ref _verifiedOn, value);
             }
         }
 
-        private int _validatedBy = 0;
-        public int ValidatedBy
+        private int _verifiedBy = 0;
+        public int VerifiedBy
         {
-            get { return _validatedBy; }
+            get { return _verifiedBy; }
             set
             {
-                SetProperty(ref _validatedBy, value);
+                SetProperty(ref _verifiedBy, value);
             }
         }
 
-        private string _validatedByName = "";
-        public string ValidatedByName
+        private string _verifiedByName = "";
+        public string VerifiedByName
         {
-            get { return _validatedByName; }
+            get { return _verifiedByName; }
             set
             {
-                SetProperty(ref _validatedByName, value);
+                SetProperty(ref _verifiedByName, value);
             }
         }
+
+        private string _approvedOn = "";
+        public string ApprovedOn
+        {
+            get { return _approvedOn; }
+            set
+            {
+                SetProperty(ref _approvedOn, value);
+            }
+        }
+
         private int _approvedBy = 0;
         public int ApprovedBy
         {

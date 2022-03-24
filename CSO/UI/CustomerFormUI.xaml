@@ -148,7 +148,11 @@
                 <TextBox IsEnabled="False" Style="{StaticResource MaterialDesignTextBox}" IsReadOnly="True" Width="120" Grid.Column="1" Grid.Row="5" Margin="5,10,0,0"
                                  Text="{Binding Path=CreatedOn,StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}" 
                                  HorizontalAlignment="Left"/>
-                <CheckBox Content="Active" IsChecked="{Binding Active,UpdateSourceTrigger=PropertyChanged}"  Margin="5,10,0,0"/>
+                <StackPanel Grid.Row="5" Margin="5" Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding Active,UpdateSourceTrigger=PropertyChanged}"  Margin="5"/>
+                    <Label Content="Aktif" Style="{StaticResource LabelStyle}" HorizontalAlignment="Left" />
+
+                </StackPanel>
 
             </StackPanel>
 

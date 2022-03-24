@@ -77,6 +77,9 @@
     <Compile Include="Proxy\AreaProxy.cs" />
     <Compile Include="Proxy\CustomerProxy.cs" />
     <Compile Include="Proxy\LookupProxy.cs" />
+    <Compile Include="Proxy\OrderProxy.cs" />
+    <Compile Include="Proxy\ProductProxy.cs" />
+    <Compile Include="Proxy\PromotionProxy.cs" />
     <Compile Include="Proxy\RoleProxy.cs" />
     <Compile Include="Proxy\UserProxy.cs" />
     <Compile Include="Resource\Theme\CSO\ComboBox.xaml.cs">
@@ -91,6 +94,7 @@
     <Compile Include="Resource\Theme\CSO\TextBox.xaml.cs">
       <DependentUpon>TextBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tool\Converter.cs" />
     <Compile Include="Tool\CustomCommand.cs" />
     <Compile Include="Tool\DBHelper.cs" />
     <Compile Include="Tool\UICustom.cs" />
@@ -111,6 +115,15 @@
     <Compile Include="UI\MainUI.xaml.cs">
       <DependentUpon>MainUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\OrderFormUI.xaml.cs">
+      <DependentUpon>OrderFormUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrderGridUI.xaml.cs">
+      <DependentUpon>OrderGridUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\OrderUI.xaml.cs">
+      <DependentUpon>OrderUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\PopupUI.xaml.cs">
       <DependentUpon>PopupUI.xaml</DependentUpon>
     </Compile>
@@ -121,6 +134,10 @@
     <Compile Include="VO\CustomerVO.cs" />
     <Compile Include="VO\FilterVO.cs" />
     <Compile Include="VO\LookupVO.cs" />
+    <Compile Include="VO\OrderProductVO.cs" />
+    <Compile Include="VO\OrderVO.cs" />
+    <Compile Include="VO\ProductVO.cs" />
+    <Compile Include="VO\PromotionVO.cs" />
     <Compile Include="VO\RoleVO.cs" />
     <Compile Include="VO\UserRightsVO.cs" />
     <Compile Include="VO\UserVO.cs" />
@@ -166,6 +183,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resource\Image\icon-cancel-blue-32.png" />
+    <Resource Include="Resource\Image\icon-cancel-blue-40.png" />
+    <Resource Include="Resource\Image\icon-cancel-disabled-32.png" />
+    <Resource Include="Resource\Image\icon-cancel-hover-32.png" />
+    <Resource Include="Resource\Image\icon-cancel-hover-40.png" />
+    <Resource Include="Resource\Image\icon-accept-blue-40.png" />
+    <Resource Include="Resource\Image\icon-accept-hover-40.png" />
+    <Resource Include="Resource\Image\icon-search-disabled-32.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -276,6 +301,18 @@
     <Page Include="UI\MainUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\OrderFormUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\OrderGridUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\OrderUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\PopupUI.xaml">
       <Generator>MSBuild:Compile</Generator>

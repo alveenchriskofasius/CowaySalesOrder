@@ -251,7 +251,51 @@ namespace CSO.UI
                 Main.ShowMessage("Gagal tarik data", ex.Message);
             }
         }
-
+        protected void FillComboProduct(ComboBox combo, bool isDiscount = false, int typeID = 0, decimal discount = 0)
+        {
+            List<ProductVO> products;
+            try
+            {
+                products = ProductProxy.Data(isDiscount, typeID, discount);
+                combo.ItemsSource = products;
+                combo.SelectedValuePath = "ID";
+                combo.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                Main.ShowMessage("Gagal tarik data Produk", ex.Message);
+            }
+        }
+        protected async void FillComboCustomer(ComboBox combo)
+        {
+            List<CustomerVO> customers;
+            try
+            {
+                customers = await CustomerProxy.Data(false);
+                combo.ItemsSource = customers;
+                combo.SelectedValuePath = "ID";
+                combo.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                Main.ShowMessage("Gagal tarik data Produk", ex.Message);
+            }
+        }
+        protected void FillComboPromotion(ComboBox combo)
+        {
+            List<PromotionVO> promotions;
+            try
+            {
+                promotions = PromotionProxy.Data();
+                combo.ItemsSource = promotions;
+                combo.SelectedValuePath = "ID";
+                combo.DisplayMemberPath = "Name";
+            }
+            catch (Exception ex)
+            {
+                Main.ShowMessage("Gagal tarik data Produk", ex.Message);
+            }
+        }
         #endregion
     }
 

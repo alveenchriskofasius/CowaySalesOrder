@@ -35,7 +35,7 @@ namespace CSO.UI
             InitializeComponent();
             _customer = new CustomerVO();
             DataContext = _customer;
-            FillComboLookup(ComboType, "CustomerType");
+            FillComboLookup(ComboType, "Type");
             FillPostalCode();
         }
         private void Validation_Error(object sender, ValidationErrorEventArgs e)

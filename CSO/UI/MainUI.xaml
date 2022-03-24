@@ -142,8 +142,8 @@
             <MenuItem Header="_Master" Name="Master" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="_Pelanggan" Name="Customer" Click="MenuItem_Click" />
             </MenuItem>
-            <MenuItem Header="_Karyawan" Name="Employee" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
-                <MenuItem Header="_Absen" Name="Absent" Click="MenuItem_Click" />
+            <MenuItem Header="_Transaksi" Name="Transaction" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
+                <MenuItem Header="_Pemesanan" Name="Order" Click="MenuItem_Click" />
             </MenuItem>
         </Menu>
 

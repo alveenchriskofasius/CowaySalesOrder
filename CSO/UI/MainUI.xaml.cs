@@ -57,7 +57,7 @@ namespace CSO.UI
         private void SetMenuVisibility()
         {
             Customer.Visibility = Master.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("System") ? Visibility.Visible : Visibility.Collapsed;
-            Employee.Visibility = Absent.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("Karyawan") ? Visibility.Visible : Visibility.Collapsed;
+            Transaction.Visibility = Order.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("Karyawan") ? Visibility.Visible : Visibility.Collapsed;
 
         }
 
@@ -257,6 +257,9 @@ namespace CSO.UI
             {
                 case "Customer":
                     userControl = new CustomerUI();
+                    break;
+                case "Order":
+                    userControl = new OrderUI();
                     break;
             }
 

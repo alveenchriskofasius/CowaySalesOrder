@@ -87,7 +87,7 @@ namespace CSO.Proxy
                 }
             }
         }
-        public static Task<List<CustomerVO>> Data(FilterVO filter, bool withAll = false)
+        public static Task<List<CustomerVO>> Data(FilterVO filter)
         {
             return Task.Run(() =>
             {
@@ -113,18 +113,41 @@ namespace CSO.Proxy
                 return customers;
             });
         }
-        public static CustomerVO Data(CustomerVO trader)
+        public static CustomerVO Data(CustomerVO customer)
         {
             object[] parameters = {
-                "@ID", trader.ID
+                "@ID", customer.ID
 
             };
             DataSet result = DBHelper.ExecuteProcedure("uspCustomerGet", parameters);
-
-            trader.SetValue(result.Tables[0].Rows[0]);
+            if (result.Tables[0].Rows.Count > 0)
+            {
+                customer.SetValue(result.Tables[0].Rows[0]);
+            }
 
             // has results
-            return trader;
+            return customer;
+        }
+        public static Task<List<CustomerVO>> Data(bool withAll)
+        {
+            return Task.Run(() =>
+            {
+                List<CustomerVO> customers = new List<CustomerVO>();
+
+
+                DataSet result = DBHelper.ExecuteProcedure("uspCustomerCombo");
+                if (withAll)
+                {
+                    customers.Add(new CustomerVO { ID = 0, Name = "Semua Pelanggan" });
+                }
+                foreach (DataRow dataRow in result.Tables[0].Rows)
+                {
+                    customers.Add(new CustomerVO(dataRow));
+                }
+
+                // has results
+                return customers;
+            });
         }
 
         public static void Delete(CustomerVO customer)
