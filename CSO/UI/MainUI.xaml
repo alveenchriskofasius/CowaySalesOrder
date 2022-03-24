@@ -141,6 +141,8 @@
         <Menu Grid.Column="1" Background="Transparent" VerticalAlignment="Center" Name="Main_Menu">
             <MenuItem Header="_Master" Name="Master" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="_Pelanggan" Name="Customer" Click="MenuItem_Click" />
+                <MenuItem Header="_User" Name="User" Click="MenuItem_Click" />
+
             </MenuItem>
             <MenuItem Header="_Transaksi" Name="Transaction" Style="{StaticResource menuParentStyle}" ItemContainerStyle="{DynamicResource MenuItemStyle1}" Template="{DynamicResource MenuItemControlTemplate2}"  >
                 <MenuItem Header="_Pemesanan" Name="Order" Click="MenuItem_Click" />

@@ -127,6 +127,15 @@
     <Compile Include="UI\PopupUI.xaml.cs">
       <DependentUpon>PopupUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserFormUI.xaml.cs">
+      <DependentUpon>UserFormUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserGridUI.xaml.cs">
+      <DependentUpon>UserGridUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserUI.xaml.cs">
+      <DependentUpon>UserUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VO\AreaVO.cs" />
     <Compile Include="VO\BaseHeaderVO.cs" />
     <Compile Include="VO\BaseMasterVO.cs" />
@@ -250,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resource\Theme\CSO\CheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resource\Theme\CSO\ComboBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -267,6 +280,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resource\Theme\CSO\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Theme\CSO\ListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -317,6 +334,18 @@
     <Page Include="UI\PopupUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\UserFormUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserGridUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\UserUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

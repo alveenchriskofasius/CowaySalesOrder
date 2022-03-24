@@ -261,6 +261,9 @@ namespace CSO.UI
                 case "Order":
                     userControl = new OrderUI();
                     break;
+                case "User":
+                    userControl = new UserUI();
+                    break;
             }
 
             return userControl;

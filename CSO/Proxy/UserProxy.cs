@@ -25,7 +25,7 @@ namespace CSO.Proxy
 
                 DataSet result = DBHelper.ExecuteProcedure("uspUserLogin", parameters);
 
-                CurrentUser = new UserVO(); ;
+                CurrentUser = new UserVO();
 
                 // has results
                 if (result.Tables[0].Rows.Count == 1)
@@ -38,7 +38,69 @@ namespace CSO.Proxy
 
             });
         }
+        public static void Save(ref UserVO user, List<RoleVO> roles = null)
+        {
+            bool isNew = user.ID == 0;
 
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+
+                    if (isNew)
+                    {
+                        object[] parameters = {
+                            "@Username", user.Username,
+                            "@Password", user.Password,
+                            "@FullName", user.FullName,
+                            "@Gender", user.Gender,
+                            "@Active", user.Active
+                        };
+
+                        DataSet result = DBHelper.ExecuteProcedure("uspUserAdd", parameters);
+
+                        if (result.Tables[0].Rows.Count == 1)
+                        {
+                            // retrieve the ID
+                            user.ID = Convert.ToInt32(result.Tables[0].Rows[0]["ID"]);
+                        }
+                    }
+                    else
+                    {
+                        object[] parameters = {
+                            "@ID", user.ID,
+                            "@Username", user.Username,
+                            "@Password", user.Password,
+                            "@FullName", user.FullName,
+                            "@Gender", user.Gender,
+                            "@Active", user.Active,
+                        };
+                        DBHelper.ExecuteProcedure("uspUserUpdate", parameters);
+                    }
+
+                    // save user role
+                    if (roles != null)
+                    {
+                        //roles = ListboxRole.ItemsSource as List<RoleVO>;
+                        RoleProxy.SaveUserRole(roles, user.ID);
+                    }
+
+                    scope.Complete();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // rollback
+                if (isNew)
+                {
+                    user.ID = 0;
+                }
+
+                throw ex;
+            }
+
+        }
         public static ObservableCollection<UserVO> Data()
         {
             ObservableCollection<UserVO> users = new ObservableCollection<UserVO>();
@@ -51,6 +113,12 @@ namespace CSO.Proxy
                 foreach (DataRow dataRow in result.Tables[0].Rows)
                 {
                     users.Add(new UserVO(dataRow));
+
+                }
+                foreach (UserVO user in users)
+                {
+                    user.Roles = RoleProxy.Data(user.ID).Where(x => x.Selected == true).ToList();
+
                 }
 
             }

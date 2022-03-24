@@ -27,5 +27,21 @@ namespace CSO.Proxy
             // has results
             return roles;
         }
+        public static void SaveUserRole(List<RoleVO> roles, int userID)
+        {
+            ListDictionary param = new ListDictionary();
+            string roleIDs = "";
+
+            foreach (RoleVO role in roles)
+            {
+                if (role.Selected)
+                    roleIDs += role.ID.ToString() + ",";
+            }
+
+            param.Clear();
+            param.Add("@RoleIDs", roleIDs);
+            param.Add("@UserID", userID);
+            DBHelper.Execute("uspUserRoleAdd", param);
+        }
     }
 }

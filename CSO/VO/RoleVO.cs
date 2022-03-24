@@ -39,7 +39,15 @@ namespace CSO.VO
                 SetProperty(ref _userName, value);
             }
         }
-
+        private bool _selected = false;
+        public bool Selected
+        {
+            get { return _selected; }
+            set
+            {
+                SetProperty(ref _selected, value);
+            }
+        }
         #endregion
 
         public RoleVO(RoleVO role)

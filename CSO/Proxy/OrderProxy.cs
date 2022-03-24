@@ -27,7 +27,7 @@ namespace CSO.Proxy
                         {
                             object[] insert = {
                            "@Date",order.Date,
-                           "@SalesID",order.EmployeeID,
+                           "@PersonInChargeID",order.PersonInChargeID,
                            "@CustomerID",order.CustomerID,
                            "@PaymentTypeID",order.PaymentTypeID,
                            "@PromotionID",order.PromotionID,
@@ -56,7 +56,7 @@ namespace CSO.Proxy
                             object[] update = {
                            "@ID", order.ID,
                            "@Date",order.Date,
-                           "@SalesID",order.EmployeeID,
+                           "@PersonInChargeID",order.PersonInChargeID,
                            "@CustomerID",order.CustomerID,
                            "@PaymentTypeID",order.PaymentTypeID,
                            "@PromotionID",order.PromotionID,
@@ -126,6 +126,32 @@ namespace CSO.Proxy
                     }
                 }
             }
+        }
+        public static Task<List<OrderVO>> Data(FilterVO filter)
+        {
+            return Task.Run(() =>
+            {
+                List<OrderVO> customers = new List<OrderVO>();
+
+                object[] parameters = {
+                        "@Name", filter.FullName,
+                        "@ProvinceID", filter.ProvinceID,
+                        "@CityID", filter.CityID,
+                        "@AreaID", filter.AreaID,
+                        "@TypeID", filter.TraderTypeID,
+                        "@Active", filter.Active
+                };
+
+                DataSet result = DBHelper.ExecuteProcedure("uspOrderListGet", parameters);
+
+                foreach (DataRow dataRow in result.Tables[0].Rows)
+                {
+                    customers.Add(new OrderVO(dataRow));
+                }
+
+                // has results
+                return customers;
+            });
         }
     }
 }

@@ -16,6 +16,16 @@
 
         <Rectangle Fill="{StaticResource TopMenuPanelBrush}" StrokeThickness="0" Grid.ColumnSpan="3"/>
         <TextBlock Margin="5" HorizontalAlignment="Right" Style="{StaticResource TextBlockTitleTextStyle}" Grid.Column="2">Transaksi | <Bold>Pemesanan</Bold></TextBlock>
-        <local:OrderFormUI x:Name="OrderForm" Grid.Row="1"/>
+        <local:OrderFormUI x:Name="OrderForm" SearchClicked="OrderForm_SearchClicked" Grid.Row="1"/>
+        <Rectangle Name="PanelOverlay" Grid.Row="1" Fill="#FF404A60" Visibility="Collapsed" MouseUp="PanelOverlay_MouseUp" ></Rectangle>
+
+        <Grid Grid.RowSpan="2" Name="PanelSearch" Margin="0,768,0,-768" Visibility="Collapsed" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <local:OrderGridUI x:Name="OrderGrid" Grid.Row="1"  />
+        </Grid>
     </Grid>
 </local:BaseUI>

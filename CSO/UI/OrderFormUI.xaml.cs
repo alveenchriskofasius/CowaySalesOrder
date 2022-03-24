@@ -30,6 +30,17 @@ namespace CSO.UI
         {
             InitializeComponent();
         }
+        public event EventHandler SearchClicked;
+        protected virtual void OnSearchClicked(EventArgs e)
+        {
+            EventHandler handler = SearchClicked;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #region Event declarations
+        #endregion
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
@@ -52,10 +63,24 @@ namespace CSO.UI
             FillComboLookup(ComboServicePackage, "ServicePackage");
             FillComboCustomer(ComboCustomer);
             FillComboPromotion(ComboPromotion);
+            FillComboPIC();
             ComboProduct.IsEnabled = TextPcs.IsEnabled = _order.CustomerID > 0 && _order.ServicePackageID > 0;
             FillForm(null);
         }
+        private void FillComboPIC()
+        {
+            try
+            {
+                ComboPIC.ItemsSource = UserProxy.Data().Where(x => x.Role("Person In Charge")).ToList();
+                ComboPIC.SelectedValuePath = "ID";
+                ComboPIC.DisplayMemberPath = "FullName";
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         private void FillForm(OrderVO order)
         {
             if (order == null)
@@ -246,7 +271,7 @@ namespace CSO.UI
 
                 case "ButtonSearch":
                     ButtonSearch.IsEnabled = false;
-                    //OnSearchClicked(new EventArgs());
+                    OnSearchClicked(new EventArgs());
                     break;
 
                 case "ButtonDelete":

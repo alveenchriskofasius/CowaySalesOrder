@@ -1,0 +1,26 @@
+﻿<local:BaseUI x:Class="CSO.UI.UserUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CSO.UI"
+             mc:Ignorable="d" 
+              Loaded="BaseUI_Loaded"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="{StaticResource MediumBaseBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Rectangle Margin="0" Fill="{StaticResource TopMenuPanelBrush}" StrokeThickness="0" Grid.ColumnSpan="2"/>
+
+        <TextBlock Grid.ColumnSpan="2" Margin="0,0,10,0"  HorizontalAlignment="Right" Style="{StaticResource TextBlockTitleTextStyle}">Master | <Bold>User</Bold></TextBlock>
+        <local:UserFormUI x:Name="UserForm" Grid.Row="1" DataChange="UserForm_DataChange" Margin="5"/>
+        <local:UserGridUI x:Name="UserGrid" Grid.Row="1" Grid.Column="1" SelectionChange="UserGrid_SelectionChange" Margin="5"/>
+    </Grid>
+</local:BaseUI>

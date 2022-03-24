@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CSO.VO;
+using CSO.Proxy;
+using System.Windows.Threading;
 
 namespace CSO.UI
 {
@@ -20,9 +23,95 @@ namespace CSO.UI
     /// </summary>
     public partial class OrderGridUI : BaseUI
     {
+        FilterVO _filter;
+        FilterVO _oldFilter;
         public OrderGridUI()
         {
             InitializeComponent();
+        }
+        DispatcherTimer _typingTimer;
+        private void TextName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_typingTimer == null)
+            {
+                _typingTimer = new DispatcherTimer();
+                _typingTimer.Interval = TimeSpan.FromMilliseconds(500);
+
+                _typingTimer.Tick += new EventHandler(this.HandleTypingTimerTimeout);
+            }
+
+            _typingTimer.Stop(); // Resets the timer
+            _typingTimer.Start();
+
+        }
+        private void HandleTypingTimerTimeout(object sender, EventArgs e)
+        {
+            DispatcherTimer timer = sender as DispatcherTimer;
+
+            if (timer == null)
+            {
+                return;
+            }
+
+            // Perform search when filter is changed 
+            if (!_oldFilter.Compare(_filter))
+            {
+                FillGrid();
+            }
+
+            // The timer must be stopped! We want to act only once per keystroke.
+            timer.Stop();
+        }
+        private void ButtonAction_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            switch (button.Name)
+            {
+                case "ButtonReset":
+                    FilterVO newFilter = new FilterVO();
+                    _filter.SetValue(newFilter);
+                    FillGrid(); // apply filters
+                    break;
+
+                case "ButtonRefresh":
+                    FillGrid();
+                    break;
+
+            }
+        }
+        private void Combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Perform search when filter is changed 
+            if (!_oldFilter.Compare(_filter))
+            {
+                FillGrid();
+            }
+        }
+        public async void FillGrid()
+        {
+            if (Main.IsLoading) return;
+            Main.ShowLoading(Loading.Loading, this);
+            try
+            {
+                GridOrder.ItemsSource = await OrderProxy.Data(_filter);
+                _oldFilter.SetValue(_filter);
+            }
+            catch (Exception ex)
+            {
+                Main.ShowMessage("Gagal Tarik data", ex.Message);
+            }
+            Main.HideLoading();
+        }
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FillGrid();
+        }
+        private void BaseUI_Loaded(object sender, RoutedEventArgs e)
+        {
+            _filter = new FilterVO();
+            _oldFilter = new FilterVO();
+            DataContext = _filter;
+            FillGrid();
         }
     }
 }

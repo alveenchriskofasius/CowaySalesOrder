@@ -39,13 +39,13 @@ namespace CSO.VO
                 SetProperty(ref _productTypeID, value);
             }
         }
-        private int _employeeID = 0;
-        public int EmployeeID
+        private int _personInChargeID = 0;
+        public int PersonInChargeID
         {
-            get { return _employeeID; }
+            get { return _personInChargeID; }
             set
             {
-                SetProperty(ref _employeeID, value);
+                SetProperty(ref _personInChargeID, value);
             }
         }
         private int _customerID = 0;
@@ -202,10 +202,16 @@ namespace CSO.VO
                         result = "Paket wajib di isi";
                     }
                     break;
-                case "EmployeeID":
-                    if (EmployeeID == 0)
+                case "PersonInChargeID":
+                    if (PersonInChargeID == 0)
                     {
                         result = "PIC wajib di isi";
+                    }
+                    break;
+                case "InstallAddress":
+                    if (string.IsNullOrEmpty(InstallAddress))
+                    {
+                        result = "Alamat Pemasangan wajib di isi";
                     }
                     break;
             }

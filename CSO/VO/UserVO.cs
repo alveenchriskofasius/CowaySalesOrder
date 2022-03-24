@@ -36,7 +36,15 @@ namespace CSO.VO
                 SetProperty(ref _fullName, value);
             }
         }
-
+        private bool _active = false;
+        public bool Active
+        {
+            get { return _active; }
+            set
+            {
+                SetProperty(ref _active, value);
+            }
+        }
         private string _username;
         public string Username
         {

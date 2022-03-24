@@ -14,6 +14,8 @@
                 <ResourceDictionary Source="Resource/Theme/CSO/ImageButton.xaml" />
                 <ResourceDictionary Source="Resource/Theme/CSO/DataGrid.xaml" />
                 <ResourceDictionary Source="Resource/Theme/CSO/ComboBox.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/ListBox.xaml" />
+                <ResourceDictionary Source="Resource/Theme/CSO/CheckBox.xaml" />
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
