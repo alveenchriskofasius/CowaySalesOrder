@@ -52,14 +52,6 @@
                 <DataGridTextColumn Header="Tipe Pembayaran" Binding="{Binding PaymentTypeName}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                 <DataGridTextColumn Header="Nama Paket" Binding="{Binding ServicePackageName}"/>
-                <DataGridTextColumn Header="Tanggal Dibuat" Binding="{Binding CreatedOn,StringFormat=dd-MM-yyyy}"/>
-                <DataGridTextColumn Header="Dibuat Oleh" Binding="{Binding CreatedByName}"/>
-                <DataGridTextColumn Header="Tanggal Diupdate" Binding="{Binding UpdatedOn,StringFormat=dd-MM-yyyy}"/>
-                <DataGridTextColumn Header="Diupdate Oleh" Binding="{Binding UpdatedByName}"/>
-                <DataGridTextColumn Header="Tanggal Diverifikasi" Binding="{Binding VerifiedOn,StringFormat=dd-MM-yyyy}"/>
-                <DataGridTextColumn Header="Diverifikasi Oleh" Binding="{Binding VerifiedByName}"/>
-                <DataGridTextColumn Header="Tanggal Disetujui" Binding="{Binding ApprovedOn,StringFormat=dd-MM-yyyy}"/>
-                <DataGridTextColumn Header="Disetujui Oleh" Binding="{Binding ApprovedByName}"/>
 
 
             </DataGrid.Columns>

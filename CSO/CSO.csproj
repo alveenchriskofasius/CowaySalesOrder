@@ -109,8 +109,8 @@
     <Compile Include="UI\CustomerUI.xaml.cs">
       <DependentUpon>CustomerUI.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\DashboardDetailUI.xaml.cs">
-      <DependentUpon>DashboardDetailUI.xaml</DependentUpon>
+    <Compile Include="UI\DashBoardDetailUI.xaml.cs">
+      <DependentUpon>DashBoardDetailUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\DashboardSelectorUI.xaml.cs">
       <DependentUpon>DashboardSelectorUI.xaml</DependentUpon>
@@ -152,6 +152,7 @@
     <Compile Include="VO\CustomerVO.cs" />
     <Compile Include="VO\FilterVO.cs" />
     <Compile Include="VO\LookupVO.cs" />
+    <Compile Include="VO\OrderDetailVO.cs" />
     <Compile Include="VO\OrderProductVO.cs" />
     <Compile Include="VO\OrderVO.cs" />
     <Compile Include="VO\ProductVO.cs" />
@@ -326,7 +327,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\DashboardDetailUI.xaml">
+    <Page Include="UI\DashBoardDetailUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

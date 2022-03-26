@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace CSO.VO
 {
@@ -60,6 +61,7 @@ namespace CSO.VO
                 SetProperty(ref _personInChargeName, value);
             }
         }
+        public ImageSource Picture { get; set; }
         private byte[] _urlImage = new byte[0];
 
         public byte[] URLImage

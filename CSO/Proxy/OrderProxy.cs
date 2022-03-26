@@ -154,6 +154,31 @@ namespace CSO.Proxy
                 return orders;
             });
         }
+        public static Task<List<OrderVO>> DataDashboard(FilterVO filter)
+        {
+            return Task.Run(() =>
+            {
+                List<OrderVO> orders = new List<OrderVO>();
+
+                object[] parameters = {
+                        "@No", filter.No,
+                        "@DateFrom", filter.DateFrom,
+                        "@DateTo", filter.DateTo,
+                        "@StatusID", filter.StatusList,
+                        "@CustomerID", filter.CustomerID
+                };
+
+                DataSet result = DBHelper.ExecuteProcedure("uspOrderDashBoardListGet", parameters);
+
+                foreach (DataRow dataRow in result.Tables[0].Rows)
+                {
+                    orders.Add(new OrderVO(dataRow));
+                }
+
+                // has results
+                return orders;
+            });
+        }
         public static OrderVO Data(int orderID)
         {
             OrderVO order = null;
@@ -163,11 +188,32 @@ namespace CSO.Proxy
             };
 
             DataSet result = DBHelper.ExecuteProcedure("uspOrderGet", data);
-            order = new OrderVO(result.Tables[0].Rows[0]);
-            order.Products = DataProduct(order.ID);
+            if (result.Tables.Count == 1)
+            {
+                order = new OrderVO(result.Tables[0].Rows[0]);
+                order.Products = DataProduct(order.ID);
+            }
+
 
             // has results
             return order;
+        }
+        public static OrderDetailVO DataDetail(int orderID)
+        {
+            OrderDetailVO orderDetail = null;
+
+            object[] data = {
+                "@ID", orderID
+            };
+
+            DataSet result = DBHelper.ExecuteProcedure("uspOrderDetailGet", data);
+            if (result.Tables.Count == 1)
+            {
+                orderDetail = new OrderDetailVO(result.Tables[0].Rows[0]);
+            }
+
+            // has results
+            return orderDetail;
         }
         public static void UpdateStatus(List<OrderVO> orders, int statusID, int assignID = 0)
         {

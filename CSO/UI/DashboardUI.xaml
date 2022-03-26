@@ -15,13 +15,12 @@
         </Grid.RowDefinitions>
         <Rectangle Margin="0" Fill="{StaticResource TopMenuPanelBrush}" StrokeThickness="0" Grid.ColumnSpan="2"/>
         <TextBlock Grid.ColumnSpan="2" Margin="0,0,10,0"  HorizontalAlignment="Right" Style="{StaticResource TextBlockTitleTextStyle}">Transaksi | <Bold>DashBoard</Bold></TextBlock>
-        <local:DashboardSelectorUI  x:Name="DashboardSelector" Grid.Row="1"  />
+        <local:DashboardSelectorUI  x:Name="DashboardSelector" RowDoubleClicked="DashboardSelector_RowDoubleClicked" Grid.Row="1"  />
 
-        <Rectangle Name="PanelOverlay" Grid.Row="1" Fill="#FF404A60" Visibility="Collapsed" ></Rectangle>
+        <Rectangle Name="PanelOverlay" Grid.Row="1" Fill="#FF404A60" Visibility="Collapsed" MouseUp="PanelOverlay_MouseUp" ></Rectangle>
 
-        <!--Left Panel-->
         <Grid Grid.Row="1" Name="PanelForm" Visibility="Collapsed" >
-            <local:DashboardDetailUI x:Name="DashboardDetail" Margin="30" 
+            <local:DashBoardDetailUI x:Name="DashboardDetail" Margin="30" 
                                  BorderBrush="{StaticResource PanelHighlight2Brush}" BorderThickness="5,5,5,5"/>
         </Grid>
     </Grid>

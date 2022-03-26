@@ -111,6 +111,7 @@ namespace CSO.UI
         {
             TextDiscount.Text = _order.Discount.ToString("N0");
             TextGrandTotal.Text = _order.Products.Sum(x => x.TotalAmount).ToString("N0");
+            _order.GrandTotal = _order.Products.Sum(x => x.TotalAmount);
         }
         private void ComboChange_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
