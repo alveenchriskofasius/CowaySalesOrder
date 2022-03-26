@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CSO.VO
 {
-    internal class OrderVO : BaseHeaderVO
+    public class OrderVO : BaseHeaderVO
     {
         #region Property setters/getters
 
@@ -21,15 +21,6 @@ namespace CSO.VO
                 SetProperty(ref _deliveryDate, value);
             }
         }
-        private int _deliveryStatusID = 0;
-        public int DeliveryStatusID
-        {
-            get { return _deliveryStatusID; }
-            set
-            {
-                SetProperty(ref _deliveryStatusID, value);
-            }
-        }
         private int _productTypeID = 0;
         public int ProductTypeID
         {
@@ -39,6 +30,7 @@ namespace CSO.VO
                 SetProperty(ref _productTypeID, value);
             }
         }
+
         private int _personInChargeID = 0;
         public int PersonInChargeID
         {
@@ -48,6 +40,17 @@ namespace CSO.VO
                 SetProperty(ref _personInChargeID, value);
             }
         }
+
+        private int _assignID = 0;
+        public int AssignID
+        {
+            get { return _assignID; }
+            set
+            {
+                SetProperty(ref _assignID, value);
+            }
+        }
+
         private string _personInChargeName = "";
         public string PersonInChargeName
         {
@@ -57,8 +60,13 @@ namespace CSO.VO
                 SetProperty(ref _personInChargeName, value);
             }
         }
+        private byte[] _urlImage = new byte[0];
 
-
+        public byte[] URLImage
+        {
+            get { return _urlImage; }
+            set { SetProperty(ref _urlImage, value); }
+        }
 
         private int _customerID = 0;
         public int CustomerID
@@ -67,6 +75,16 @@ namespace CSO.VO
             set
             {
                 SetProperty(ref _customerID, value);
+            }
+        }
+
+        private string _customerName = "";
+        public string CustomerName
+        {
+            get { return _customerName; }
+            set
+            {
+                SetProperty(ref _customerName, value);
             }
         }
 
@@ -167,6 +185,7 @@ namespace CSO.VO
                 SetProperty(ref _isCustomerAddress, value);
             }
         }
+
         private bool _isDiscounted = false;
         public bool IsDiscounted
         {
@@ -176,6 +195,17 @@ namespace CSO.VO
                 SetProperty(ref _isDiscounted, value);
             }
         }
+
+        private bool _isUploaded = false;
+        public bool IsUploaded
+        {
+            get { return _isUploaded; }
+            set
+            {
+                SetProperty(ref _isUploaded, value);
+            }
+        }
+
         private decimal _discount = 0;
         public decimal Discount
         {
@@ -183,6 +213,15 @@ namespace CSO.VO
             set
             {
                 SetProperty(ref _discount, value);
+            }
+        }
+        private bool _isServiceChange = false;
+        public bool IsServiceChange
+        {
+            get { return _isServiceChange; }
+            set
+            {
+                SetProperty(ref _isServiceChange, value);
             }
         }
         private ObservableCollection<OrderProductVO> _products = new ObservableCollection<OrderProductVO>();

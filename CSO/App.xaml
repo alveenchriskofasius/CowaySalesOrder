@@ -16,7 +16,7 @@
                 <ResourceDictionary Source="Resource/Theme/CSO/ComboBox.xaml" />
                 <ResourceDictionary Source="Resource/Theme/CSO/ListBox.xaml" />
                 <ResourceDictionary Source="Resource/Theme/CSO/CheckBox.xaml" />
-
+                <ResourceDictionary Source="Resource/Theme/CSO/ToggleButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />

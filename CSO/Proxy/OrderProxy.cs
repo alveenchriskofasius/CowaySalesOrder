@@ -26,13 +26,13 @@ namespace CSO.Proxy
                         if (isNew)
                         {
                             object[] insert = {
+                           "@No",order.No,
                            "@Date",order.Date,
                            "@PersonInChargeID",order.PersonInChargeID,
                            "@CustomerID",order.CustomerID,
                            "@PaymentTypeID",order.PaymentTypeID,
                            "@PromotionID",order.PromotionID,
                            "@StatusID",order.StatusID,
-                           "@OrderProductID",order.OrderProductID,
                            "@CreatedBy",UserProxy.CurrentUser.ID,
                            "@Quantity",order.Quantity,
                            "@GrandTotal",order.GrandTotal,
@@ -40,7 +40,8 @@ namespace CSO.Proxy
                            "@InstallAddress",order.InstallAddress,
                            "@IsDiscount",order.IsDiscounted,
                            "@IsCustomerAddress",order.IsCustomerAddress,
-                           "@ServicePackageID",order.ServicePackageID
+                           "@ServicePackageID",order.ServicePackageID,
+                           "@ImageUploaded",order.URLImage
                         };
 
                             DataSet result = DBHelper.ExecuteProcedure("uspOrderAdd", insert);
@@ -60,7 +61,6 @@ namespace CSO.Proxy
                            "@CustomerID",order.CustomerID,
                            "@PaymentTypeID",order.PaymentTypeID,
                            "@PromotionID",order.PromotionID,
-                           "@OrderProductID",order.OrderProductID,
                            "@UpdatedBy",UserProxy.CurrentUser.ID,
                            "@Quantity",order.Quantity,
                            "@GrandTotal",order.GrandTotal,
@@ -68,7 +68,8 @@ namespace CSO.Proxy
                            "@InstallAddress",order.InstallAddress,
                            "@IsDiscount",order.IsDiscounted,
                            "@IsCustomerAddress",order.IsCustomerAddress,
-                           "@ServicePackageID",order.ServicePackageID
+                           "@ServicePackageID",order.ServicePackageID,
+                           "@ImageUploaded",order.URLImage
                         };
 
                             DBHelper.ExecuteProcedure("uspOrderUpdate", update);
@@ -104,25 +105,26 @@ namespace CSO.Proxy
         }
         private static void SaveOrderProduct(int orderID, ObservableCollection<OrderProductVO> products)
         {
-            foreach (OrderProductVO product in products)
+            foreach (OrderProductVO orderProduct in products)
             {
-                if (product.IsEdited == true)
+                if (orderProduct.IsEdited == true)
                 {
                     object[] parameters = {
-                        "@ID",product.ID,
-                        "@ProductID", product.ProductID,
-                        "@Quantity", product.Quantity,
-                        "@Amount",product.TotalAmount
+                        "@ID",orderProduct.ID,
+                        "@ProductID", orderProduct.ProductID,
+                        "@Quantity", orderProduct.Quantity,
+                        "@Amount",orderProduct.TotalAmount,
+                        "@OrderID",orderID,
+                        "@DiscountAmount",orderProduct.DiscountAmount,
+                        "@TotalAmount",orderProduct.TotalAmount
                     };
-
-                    product.OrderID = orderID;
 
                     DataSet data = DBHelper.ExecuteProcedure("uspOrderProductUpdate", parameters);
 
                     if (data.Tables.Count == 1)
                     {
                         // retrieve the ID
-                        product.ID = Convert.ToInt32(data.Tables[0].Rows[0]["ID"]);
+                        orderProduct.ID = Convert.ToInt32(data.Tables[0].Rows[0]["ID"]);
                     }
                 }
             }
@@ -131,27 +133,88 @@ namespace CSO.Proxy
         {
             return Task.Run(() =>
             {
-                List<OrderVO> customers = new List<OrderVO>();
+                List<OrderVO> orders = new List<OrderVO>();
 
                 object[] parameters = {
-                        "@No", filter.FullName,
+                        "@No", filter.No,
                         "@DateFrom", filter.DateFrom,
                         "@DateTo", filter.DateTo,
-                        "@StatusID", filter.StatusID,
-                        "@CustomerID", filter.CustomerID,
-                        "@Active", filter.Active
+                        "@StatusID", filter.StatusList,
+                        "@CustomerID", filter.CustomerID
                 };
 
-                DataSet result = DBHelper.ExecuteProcedure("uspOrderListGet");
+                DataSet result = DBHelper.ExecuteProcedure("uspOrderListGet", parameters);
 
                 foreach (DataRow dataRow in result.Tables[0].Rows)
                 {
-                    customers.Add(new OrderVO(dataRow));
+                    orders.Add(new OrderVO(dataRow));
                 }
 
                 // has results
-                return customers;
+                return orders;
             });
+        }
+        public static OrderVO Data(int orderID)
+        {
+            OrderVO order = null;
+
+            object[] data = {
+                "@ID", orderID
+            };
+
+            DataSet result = DBHelper.ExecuteProcedure("uspOrderGet", data);
+            order = new OrderVO(result.Tables[0].Rows[0]);
+            order.Products = DataProduct(order.ID);
+
+            // has results
+            return order;
+        }
+        public static void UpdateStatus(List<OrderVO> orders, int statusID, int assignID = 0)
+        {
+            foreach (OrderVO order in orders)
+            {
+                if (order.Selected)
+                {
+                    object[] data = {
+                        "@ID", order.ID,
+                        "@StatusID", statusID,
+                        "@AssignID", assignID,
+                        "@StatusUpdatedBy", UserProxy.CurrentUser.ID, };
+                    DBHelper.ExecuteProcedure("uspOrderStatusUpdate", data);
+                }
+            }
+        }
+        public static ObservableCollection<OrderProductVO> DataProduct(int orderID)
+        {
+            ObservableCollection<OrderProductVO> orderProducts = new ObservableCollection<OrderProductVO>();
+            object[] parameters =
+            {
+                "@OrderID", orderID
+            };
+
+            DataSet result = DBHelper.ExecuteProcedure("uspOrderProductListGet", parameters);
+            foreach (DataRow dataRow in result.Tables[0].Rows)
+            {
+                orderProducts.Add(new OrderProductVO(dataRow));
+            }
+            // has results
+            return orderProducts;
+        }
+        public static void Delete(OrderProductVO orderProduct)
+        {
+            if (orderProduct.ID != 0)
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    object[] parameters = {
+                        "@ID", orderProduct.ID
+                    };
+
+                    DataSet result = DBHelper.ExecuteProcedure("uspOrderProductDelete", parameters);
+
+                    scope.Complete();
+                }
+            }
         }
     }
 }

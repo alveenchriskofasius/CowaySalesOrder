@@ -105,7 +105,7 @@ namespace CSO.VO
             {
                 foreach (RoleVO userRole in _roles)
                 {
-                    if (userRole.Name.ToLower() == role.ToLower())
+                    if (userRole.Name.ToLower() == role.ToLower() && userRole.Selected)
                     {
                         return true;
                     }

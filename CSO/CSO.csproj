@@ -109,6 +109,15 @@
     <Compile Include="UI\CustomerUI.xaml.cs">
       <DependentUpon>CustomerUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DashboardDetailUI.xaml.cs">
+      <DependentUpon>DashboardDetailUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DashboardSelectorUI.xaml.cs">
+      <DependentUpon>DashboardSelectorUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DashboardUI.xaml.cs">
+      <DependentUpon>DashboardUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\LoginUI.xaml.cs">
       <DependentUpon>LoginUI.xaml</DependentUpon>
     </Compile>
@@ -192,6 +201,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resource\Image\icon-ringing-blue-phone-32.png" />
+    <Resource Include="Resource\Image\icon-ringing-phone-hover-32.png" />
     <Resource Include="Resource\Image\icon-cancel-blue-32.png" />
     <Resource Include="Resource\Image\icon-cancel-blue-40.png" />
     <Resource Include="Resource\Image\icon-cancel-disabled-32.png" />
@@ -299,6 +310,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resource\Theme\CSO\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\CustomerFormUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -308,6 +323,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\CustomerUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DashboardDetailUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DashboardSelectorUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\DashboardUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

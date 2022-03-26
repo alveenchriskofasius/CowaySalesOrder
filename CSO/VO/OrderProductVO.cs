@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CSO.VO
 {
-    internal class OrderProductVO : BaseMasterVO
+    public class OrderProductVO : BaseMasterVO
     {
         #region Property setters/getters
 

@@ -24,7 +24,15 @@ namespace CSO.VO
                 SetProperty(ref _fullName, value);
             }
         }
-
+        private string _statusList = "";
+        public string StatusList
+        {
+            get { return _statusList; }
+            set
+            {
+                SetProperty(ref _statusList, value);
+            }
+        }
         private bool _active = true;
         public bool Active
         {
@@ -43,6 +51,7 @@ namespace CSO.VO
                 SetProperty(ref _statusID, value);
             }
         }
+
         private int _provinceID = 0;
         public int ProvinceID
         {

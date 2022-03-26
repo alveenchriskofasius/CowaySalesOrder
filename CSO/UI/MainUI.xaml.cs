@@ -264,6 +264,9 @@ namespace CSO.UI
                 case "User":
                     userControl = new UserUI();
                     break;
+                case "Dashboard":
+                    userControl = new DashboardUI();
+                    break;
             }
 
             return userControl;

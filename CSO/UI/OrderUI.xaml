@@ -25,7 +25,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <local:OrderGridUI x:Name="OrderGrid" Grid.Row="1"  />
+            <local:OrderGridUI x:Name="OrderGrid" RowDoubleClicked="OrderGrid_RowDoubleClicked" Grid.Row="1"  />
         </Grid>
     </Grid>
 </local:BaseUI>

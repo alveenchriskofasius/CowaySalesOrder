@@ -61,7 +61,6 @@
                     HoverImage="/Resource/Image/icon-trash-blue-32.png" 
                     DisabledImage="/Resource/Image/icon-trash-disabled-32.png"
                     IsEnabled="False"/>
-                <Border BorderThickness="1,0,0,0" BorderBrush="{StaticResource LabelBrush}" Margin="0,13"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" FlowDirection="RightToLeft">
@@ -128,7 +127,7 @@
             <Label Content="Promosi" Style="{StaticResource LabelStyle}" Grid.Column="6"  Margin="20,0,0,0" VerticalAlignment="Center"/>
             <ComboBox x:Name="ComboPromotion" Grid.Column="7" Width="150" HorizontalAlignment="Left"
                       SelectionChanged="ComboChange_SelectionChanged" IsEnabled="False"
-                      SelectedValue="{Binding PromotionID,UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+                      SelectedValue="{Binding PromotionID}" Margin="5"/>
 
             <CheckBox x:Name="CheckBoxPromotion" Margin="20,0,0,0" VerticalAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"
                       IsChecked="{Binding IsDiscounted,UpdateSourceTrigger=PropertyChanged}" Grid.Column="8" IsEnabled="False" />
@@ -198,15 +197,28 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel  HorizontalAlignment="Left" Grid.Row="5" Orientation="Horizontal">
+            <Label Content="Diskon" Style="{StaticResource LabelStyle}" Margin="5"/>
+            <TextBox x:Name="TextDiscount" Width="100" HorizontalAlignment="Left" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="5" Grid.Row="5">0</TextBox>
+            <Label Content="Grand Total" Style="{StaticResource LabelStyle}" Margin="5"/>
+            <TextBox x:Name="TextGrandTotal" Width="100" HorizontalContentAlignment="Right" VerticalAlignment="Center" Margin="5">0</TextBox>
 
-        <Button Grid.Row="5" Command="command:CustomCommand.Save" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+
+        </StackPanel>
+        <StackPanel Grid.Row="5" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Image x:Name="ImageUploaded" Source="/Resource/Image/icon-checkmark-32.png" Margin="5" Visibility="Hidden" />
+            <Button x:Name="ButtonUpload" Grid.Row="5" Click="ButtonAction_Click" Content="Upload Dokumen"/>
+            <Button  Command="command:CustomCommand.Save"
                 Margin="5">
-            <Button.Content>
-                <TextBlock>
+                <Button.Content>
+                    <TextBlock>
                     <Underline>S</Underline>impan
-                </TextBlock>
-            </Button.Content>
-        </Button>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+
 
     </Grid>
 </local:BaseUI>

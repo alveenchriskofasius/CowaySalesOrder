@@ -14,6 +14,15 @@ namespace CSO.Tool
                  new KeyGesture(Key.S, ModifierKeys.Control)
             }
         );
-
+        public static readonly RoutedUICommand Assign = new RoutedUICommand
+        (
+           "Assign",
+           "Assign",
+           typeof(CustomCommand),
+           new InputGestureCollection()
+           {
+                 new KeyGesture(Key.A, ModifierKeys.Control)
+           }
+       );
     }
 }

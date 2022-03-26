@@ -29,6 +29,17 @@ namespace CSO.UI
         {
             InitializeComponent();
         }
+        #region Event declarations
+        public event EventHandler<DataChangedEventArgs> RowDoubleClicked;
+        protected virtual void OnRowDoubleClicked(DataChangedEventArgs e)
+        {
+            EventHandler<DataChangedEventArgs> handler = RowDoubleClicked;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
         DispatcherTimer _typingTimer;
 
         private void HandleTypingTimerTimeout(object sender, EventArgs e)
@@ -89,7 +100,6 @@ namespace CSO.UI
         }
         public async void FillGrid()
         {
-            if (Main.IsLoading) return;
             Main.ShowLoading(Loading.Loading, this);
             try
             {
@@ -111,9 +121,17 @@ namespace CSO.UI
             _filter = new FilterVO();
             _oldFilter = new FilterVO();
             DataContext = _filter;
-            FillGrid();
+            FillComboLookup(ComboStatus, "Status", "Semua Status");
+            FillComboCustomer(ComboCustomer);
         }
 
-
+        private void GridOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            OrderVO order = GridOrder.SelectedItem as OrderVO;
+            if (order != null)
+            {
+                OnRowDoubleClicked(new DataChangedEventArgs(order));
+            }
+        }
     }
 }

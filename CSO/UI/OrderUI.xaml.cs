@@ -13,7 +13,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using CSO.VO;
 namespace CSO.UI
 {
     /// <summary>
@@ -66,10 +66,24 @@ namespace CSO.UI
                 animatePanel.Begin(PanelSearch);
                 animatePanel = Application.Current.Resources["SBOverlayFadeOut"] as Storyboard;
                 animatePanel.Begin(PanelOverlay);
-                
+
             }
         }
 
         #endregion
+
+        private void OrderGrid_RowDoubleClicked(object sender, DataChangedEventArgs e)
+        {
+            if (e.Entity as OrderVO != null)
+            {
+                OrderForm.FillForm(e.Entity as OrderVO);
+
+            }
+            else
+            {
+                OrderForm.FillForm(null);
+            }
+            ToggleSearchPanel();
+        }
     }
 }

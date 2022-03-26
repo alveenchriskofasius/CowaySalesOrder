@@ -266,7 +266,7 @@ namespace CSO.UI
                 Main.ShowMessage("Gagal tarik data Produk", ex.Message);
             }
         }
-        protected async void FillComboCustomer(ComboBox combo)
+        protected async void FillComboCustomer(ComboBox combo, bool withAll = false)
         {
             List<CustomerVO> customers;
             try
@@ -275,6 +275,10 @@ namespace CSO.UI
                 combo.ItemsSource = customers;
                 combo.SelectedValuePath = "ID";
                 combo.DisplayMemberPath = "Name";
+                if (withAll)
+                {
+                    customers.Add(new CustomerVO { ID = 0, Name = "Semua Pelanggan" });
+                }
             }
             catch (Exception ex)
             {
