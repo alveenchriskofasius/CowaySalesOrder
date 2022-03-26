@@ -245,6 +245,7 @@ namespace CSO.UI
                 ComboArea.DisplayMemberPath = "Name";
                 ComboArea.SelectedValuePath = "ID";
                 ComboArea.SelectedValue = _customer.AreaID;
+                if (ComboArea.SelectedValue == null) { _customer.AreaID = 0; };
             }
             catch (Exception ex)
             {

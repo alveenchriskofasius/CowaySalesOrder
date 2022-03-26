@@ -135,6 +135,27 @@ namespace CSO.UI
                     break;
 
                 case "ButtonDelete":
+                    if (_user.ID == 0)
+                    {
+                        return;
+                    }
+
+                    if (MessageBox.Show("Hapus user " + _user.FullName + "?", "Konfirmasi hapus ", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            UserProxy.Delete(_user);
+                            // Notify deleted data
+                            OnDataChange(new EventArgs());
+
+                            // Display message
+                            Main.ShowMessage("Data berhasil dihapus ");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Data gagal dihapus  ", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                     break;
 
             }

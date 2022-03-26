@@ -94,7 +94,7 @@
                         Style="{StaticResource FormActionButtonStyle}"
                         NormalImage="/Resource/Image/icon-clear-filters-hover-32.png"
                         HoverImage="/Resource/Image/icon-clear-filters-blue-32.png"
-                        Click="Button_Click"/>
+                        Click="ButtonAction_Click"/>
 
                 </StackPanel>
                 <!--#endregion-->
@@ -309,9 +309,9 @@
                                 <DataGridTextColumn  Header="Tgl. Pesan"  Binding="{Binding Date, StringFormat= dd-MM-yy HH:mm}" IsReadOnly="True"  />
                                 <DataGridTextColumn  Header="No. Pesanan" Binding="{Binding No}" IsReadOnly="True" />
                                 <DataGridTextColumn  Header="Pelanggan" Binding="{Binding CustomerName}" IsReadOnly="True" />
-                                <DataGridTextColumn  Header="Total Harga" Binding="{Binding GrandTotal}" IsReadOnly="True" />
-                                <DataGridCheckBoxColumn Header="Diskon" Binding="{Binding IsDiscount}" IsReadOnly="True" />
-                                <DataGridTextColumn  Header="Jumlah Discount"    Binding="{Binding Discount}" IsReadOnly="True" />
+                                <DataGridTextColumn  Header="Total" Binding="{Binding GrandTotal,StringFormat=N0}" IsReadOnly="True" />
+                                <DataGridCheckBoxColumn Header="Diskon" Binding="{Binding IsDiscounted}" IsReadOnly="True" />
+                                <DataGridTextColumn  Header="Jumlah Discount"    Binding="{Binding Discount,StringFormat=N0}" IsReadOnly="True" />
                                 <DataGridTextColumn Header="Tanggal Dibuat" Binding="{Binding CreatedOn,StringFormat=dd-MM-yyyy}"/>
                                 <DataGridTextColumn Header="Dibuat Oleh" Binding="{Binding CreatedByName}"/>
                                 <DataGridTextColumn Header="Tanggal Diupdate" Binding="{Binding UpdatedOn,StringFormat=dd-MM-yyyy}"/>

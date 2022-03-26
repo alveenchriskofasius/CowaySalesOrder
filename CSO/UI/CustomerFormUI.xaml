@@ -91,9 +91,8 @@
                              Validation.ErrorTemplate="{StaticResource TextBoxErrorAdorner}"  Validation.Error="Validation_Error"/>
                 <Label Content="Kode Pos" HorizontalAlignment="Left" Margin="5" Style="{StaticResource LabelStyle}" Grid.Row="4"/>
                 <TextBox x:Name="TextBoxZIP" Text="{Binding Postal,UpdateSourceTrigger=PropertyChanged}" 
-                             HorizontalAlignment="Left" Width="100" LostFocus="TextBox_LostFocus"
-                             Margin="5" Grid.Column="1" Grid.Row="4" 
-                             AcceptsReturn="True" Style="{StaticResource MaterialDesignTextBox}"/>
+                             HorizontalAlignment="Left" Width="100" LostFocus="TextBox_LostFocus" 
+                             Margin="5" Grid.Column="1" Grid.Row="4"  Style="{StaticResource MaterialDesignTextBox}"/>
 
 
 

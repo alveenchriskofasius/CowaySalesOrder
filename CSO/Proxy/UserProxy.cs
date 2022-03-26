@@ -131,5 +131,22 @@ namespace CSO.Proxy
             return (users);
 
         }
+
+        public static void Delete(UserVO user)
+        {
+            if (user.ID != 0)
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    object[] parameters = {
+                        "@ID", user.ID
+                    };
+
+                    DBHelper.ExecuteProcedure("uspUserDelete", parameters);
+
+                    scope.Complete();
+                }
+            }
+        }
     }
 }

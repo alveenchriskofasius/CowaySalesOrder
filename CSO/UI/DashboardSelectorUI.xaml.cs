@@ -180,7 +180,55 @@ namespace CSO.UI
                 FillGrid();
             }
         }
+        private void SetFilters()
+        {
+            _filter.StatusList = String.Empty;
+            if (RadioOpen.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Open;
+            }
+            else if (RadioVerified.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Verified;
 
+            }
+            else if (RadioApproved.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Approved;
+
+            }
+            else if (RadioProcess.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Process;
+
+            }
+            else if (RadioPhoneProcess.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.OnCallProcess;
+            }
+            else if (RadioCTAssign.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.CTAssign + "," + (int)Status.CTAssigned;
+
+            }
+            else if (RadioCompleted.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Completed;
+
+            }
+            else if (RadioRejected.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Rejected;
+            }
+            else if (RadioRefund.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Refund;
+            }
+            else if (RadioCanceled.IsChecked == true)
+            {
+                _filter.StatusList += (int)Status.Canceled;
+            }
+        }
         private void Radio_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radio = (RadioButton)sender;
@@ -208,8 +256,8 @@ namespace CSO.UI
                     _secondaryStatusID = (int)Status.Rejected; //Rejected
                     ColumnVerificationOn.Width = ColumnVerificationBy.Width = UserProxy.CurrentUser.Role("Admin Level 2") ? new DataGridLength(1, DataGridLengthUnitType.Auto) : 0;
                     ButtonPrimaryStatus.Content = "Setujui";
-                    //ButtonPrimaryStatus.IsEnabled = ButtonCancel.IsEnabled = UserProxy.CurrentUser.Role("Admin Level 2");
-                    ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility
+                    ButtonSecondaryStatus.Content = "Tolak";
+                    ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonSecondaryStatus.Visibility = BorderSecondaryStatus.Visibility
                         = UserProxy.CurrentUser.Role("Admin Level 2") ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 case "RadioApproved":
@@ -228,8 +276,9 @@ namespace CSO.UI
                 case "RadioPhoneProcess":
                     _filter.StatusList += (int)Status.OnCallProcess;
                     _primaryStatusID = (int)Status.CTAssign;
-                    _secondaryStatusID = (int)Status.Canceled;
+                    _secondaryStatusID = (int)Status.Refund;
                     ButtonPrimaryStatus.Content = "Verifikasi berhasil";
+                    ButtonCancel.Content = "Verifikasi gagal";
                     ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility = Visibility.Visible;
                     break;
                 case "RadioCTAssign":
@@ -251,7 +300,7 @@ namespace CSO.UI
                     _filter.StatusList += (int)Status.Rejected;
                     _secondaryStatusID = (int)Status.Refund; //change to cancel after refund
                     ButtonCancel.Content = "Proses Refund";
-                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Accounts Payable") ? Visibility.Visible : Visibility.Collapsed;
+                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
                     //ButtonPrimaryStatus.IsEnabled = UserProxy.CurrentUser.Role("Accounts Payable") && GridCustomer.Items.Count > 0;
                     ColumnRejectedOn.Width = ColumnRejectedBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     break;
@@ -259,7 +308,7 @@ namespace CSO.UI
                     _filter.StatusList += (int)Status.Refund;
                     _secondaryStatusID = (int)Status.Canceled;
                     ButtonCancel.Content = "Proses Cancel";
-                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
+                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Accounts Payable") ? Visibility.Visible : Visibility.Collapsed;
                     ColumnRejectedOn.Width = ColumnRejectedBy.Width = ColumnRefundOn.Width = ColumnRefundBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     break;
                 case "RadioCanceled":
@@ -284,7 +333,7 @@ namespace CSO.UI
             {
                 string Status = status;
                 bool isValid = false;
-                _filter.StatusList = "";
+                _filter.StatusList = String.Empty;
                 foreach (OrderVO order in GridCustomer.ItemsSource)
                 {
                     if (order.Selected == true)
@@ -302,7 +351,6 @@ namespace CSO.UI
 
                     }
                 }
-
                 return isValid;
 
             }
@@ -322,7 +370,7 @@ namespace CSO.UI
             }
             else if (RadioVerified.IsChecked == true)
             {
-                ButtonPrimaryStatus.IsEnabled = ButtonCancel.IsEnabled = IsStatusUniform("Verified", "Admin Level 2");
+                ButtonPrimaryStatus.IsEnabled = ButtonSecondaryStatus.IsEnabled = IsStatusUniform("Verified", "Admin Level 2");
             }
             else if (RadioApproved.IsChecked == true)
             {
@@ -343,11 +391,11 @@ namespace CSO.UI
             }
             else if (RadioRejected.IsChecked == true)
             {
-                ButtonCancel.IsEnabled = IsStatusUniform("Rejected", "Accounts Payable");
+                ButtonCancel.IsEnabled = IsStatusUniform("Rejected", "Admin Level 1");
             }
             else if (RadioRefund.IsChecked == true)
             {
-                ButtonCancel.IsEnabled = IsStatusUniform("Refund", "Admin Level 1 ");
+                ButtonCancel.IsEnabled = IsStatusUniform("Refund", "Accounts Payable");
             }
         }
 
@@ -384,15 +432,10 @@ namespace CSO.UI
             }
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         public async void FillGrid()
         {
             Main.ShowLoading(Loading.Loading, this);
-
+            SetFilters();
             try
             {
                 GridCustomer.ItemsSource = await OrderProxy.DataDashboard(_filter);

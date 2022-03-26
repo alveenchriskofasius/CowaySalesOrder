@@ -98,14 +98,17 @@ namespace CSO.UI
             }
             else
             {
-                order = OrderProxy.Data(order.ID);
-                _order.SetValue(order);
-                _order.IsUploaded = true;
+
+                _order.SetValue(OrderProxy.Data(order.ID));
+                _order.IsUploaded = _order.URLImage.Length > 0;
             }
 
             GridProduct.ItemsSource = _order.Products;
             ImageUploaded.Visibility = _order.IsUploaded ? Visibility.Visible : Visibility.Collapsed;
             Calculate();
+
+            ButtonDelete.IsEnabled = _order.ID != 0;
+
         }
         private void Calculate()
         {
@@ -120,7 +123,7 @@ namespace CSO.UI
             PromotionVO promotion = ComboPromotion.SelectedItem as PromotionVO;
             ProductVO product = ComboProduct.SelectedItem as ProductVO;
             LookupVO service = ComboServicePackage.SelectedItem as LookupVO;
-
+            List<LookupVO> services = ComboServicePackage.ItemsSource as List<LookupVO>;
             switch (combo.Name)
             {
 
@@ -140,7 +143,7 @@ namespace CSO.UI
                     if (customer == null) return;
                     LookupVO type = types.FirstOrDefault(x => x.ID == customer.TypeID);
                     ComboPaymentType.SelectedItem = type;
-                    //_order.Products = Promotion(customer.TypeID, customer.TypeID == 1 ? 2000000 : 1000000);
+                    if (type.ID == 1) { services.Where(x => x.ID == 1); }
                     Promotion();
                     break;
                 case "ComboPromotion":
@@ -151,51 +154,8 @@ namespace CSO.UI
                     }
                     break;
                 case "ComboServicePackage":
+
                     //clear products in the grid
-                    //if (service != null)
-                    //{
-                    //    int serviceID = _order.ServicePackageID;
-                    //    if (GridProduct.Items.Count > 0)
-                    //    {
-                    //        bool delete = MessageBox.Show("Yakin ingin mengganti paket? tindakan ini akan menghapus semua produk yang sudah di input", "Paket diganti", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
-                    //        if (delete)
-                    //        {
-                    //            Main.ShowLoading(Loading.Deleting, this);
-                    //            try
-                    //            {
-
-                    //                foreach (OrderProductVO orderProduct in _order.Products.ToList())
-                    //                {
-                    //                    if (orderProduct.ID != 0 && delete)
-                    //                    {
-                    //                        OrderProxy.Delete(orderProduct);
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        _order.Products.Remove(orderProduct);
-                    //                    }
-                    //                }
-                    //                Main.ShowMessage("Data produk berhasil dihapus");
-
-                    //            }
-                    //            catch (Exception ex)
-                    //            {
-
-                    //                Main.ShowMessage("Data produk gagal dihapus", ex.Message, Message.Error);
-                    //            }
-                    //            Main.HideLoading();
-
-                    //        }
-                    //        else
-                    //        {
-                    //            List<LookupVO> services = ComboServicePackage.ItemsSource as List<LookupVO>;
-                    //            LookupVO autoSelect = services.FirstOrDefault(x => x.ID == serviceID);
-                    //            ComboServicePackage.SelectedItem = autoSelect;
-                    //        }
-                    //    }
-
-
-                    //}
                     break;
 
             }
@@ -272,7 +232,7 @@ namespace CSO.UI
         #region Command Definitions
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0 && GridProduct.Items.Count > 0 && _order.IsUploaded;
+            e.CanExecute = _noOfErrorsOnScreen == 0 && GridProduct.Items.Count > 0 && _order.IsUploaded && _order.StatusID == 0;
             e.Handled = true;
         }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -440,29 +400,27 @@ namespace CSO.UI
                     break;
 
                 case "ButtonDelete":
-                    //if (_trade.ID == 0)
-                    //{
-                    //    return;
-                    //}
+                    if (_order.ID == 0)
+                    {
+                        return;
+                    }
 
-                    //if (MessageBox.Show("Hapus Perhiasan " + _trade.No + "?", "Konfirmasi Hapus", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                    //{
-                    //    try
-                    //    {
-                    //        await TradeProxy.Delete(_trade.ID);
+                    if (MessageBox.Show("Hapus Order " + _order.No + "?", "Konfirmasi Hapus", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        try
+                        {
+                            OrderProxy.Delete(_order);
 
-                    //        // Notify deleted data
-                    //        OnDataDeleted(new DataChangedEventArgs(_trade));
-                    //        // Display message
-                    //        Main.ShowMessage("Data berhasil dihapus");
+                            // Display message
+                            Main.ShowMessage("Data berhasil dihapus");
 
-                    //        FillForm(null);
-                    //    }
-                    //    catch (Exception ex)
-                    //    {
-                    //        Main.ShowMessage("Data gagal di hapus", ex.Message);
-                    //    }
-                    //}
+                            FillForm(null);
+                        }
+                        catch (Exception ex)
+                        {
+                            Main.ShowMessage("Data gagal di hapus", ex.Message);
+                        }
+                    }
                     break;
                 case "ButtonAccept":
                     UpdateRow();

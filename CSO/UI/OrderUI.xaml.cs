@@ -42,8 +42,8 @@ namespace CSO.UI
             if (PanelOverlay.Opacity == 0.4)
             {
                 ToggleSearchPanel();
+                OrderForm.Restore();
             }
-            OrderForm.Restore();
         }
 
         #region Helper

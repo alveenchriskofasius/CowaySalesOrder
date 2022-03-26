@@ -38,7 +38,7 @@
                         SelectedDate="{Binding Path=DateFrom, UpdateSourceTrigger=PropertyChanged}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
             <DatePicker  Margin="25,0,0,0"  Name="DateTo" Width="135" VerticalAlignment="Center" IsTabStop="False" Style="{StaticResource MaterialDesignDatePicker}"
                         SelectedDate="{Binding Path=DateTo, UpdateSourceTrigger=PropertyChanged}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
-            <ComboBox Name="ComboStatus" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding Status,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
+            <ComboBox Name="ComboStatus" Grid.Column="1" Width="125" Margin="5" SelectionChanged="Combo_SelectionChanged" SelectedValue="{Binding StatusID,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource MaterialDesignComboBox}"/>
 
         </StackPanel>
 

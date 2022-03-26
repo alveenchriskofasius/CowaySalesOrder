@@ -53,11 +53,12 @@ namespace CSO.UI
         {
             // display username & icon
             SetProfile();
+            SetMenuVisibility();
         }
         private void SetMenuVisibility()
         {
-            Customer.Visibility = Master.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("System") ? Visibility.Visible : Visibility.Collapsed;
-            Transaction.Visibility = Order.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("Karyawan") ? Visibility.Visible : Visibility.Collapsed;
+            //Customer.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("System") ? Visibility.Visible : Visibility.Collapsed;
+            Transaction.Visibility = Order.Visibility = User.Visibility = !UserProxy.CurrentUser.Role("Sales") && !UserProxy.CurrentUser.Role("CT") ? Visibility.Visible : Visibility.Collapsed;
 
         }
 
@@ -87,6 +88,17 @@ namespace CSO.UI
                 PanelMain.Children.Clear();
                 PanelMain.Children.Add(userControl);
             }
+        }
+        private void Menu_Checked(object sender, RoutedEventArgs e)
+        {
+            MenuItem menuItem = sender as MenuItem;
+
+            string userControlName = menuItem.Name;
+
+            BaseUI userControl = UserControl(userControlName);
+            // assign parent
+            userControl.Main = this;
+            new MainUI(userControl).Show();
         }
 
         public void ShowMessage(string message, Message type = Message.Normal)

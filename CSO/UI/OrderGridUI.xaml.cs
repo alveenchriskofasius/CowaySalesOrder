@@ -122,7 +122,7 @@ namespace CSO.UI
             _oldFilter = new FilterVO();
             DataContext = _filter;
             FillComboLookup(ComboStatus, "Status", "Semua Status");
-            FillComboCustomer(ComboCustomer);
+            FillComboCustomer(ComboCustomer,true);
         }
 
         private void GridOrder_MouseDoubleClick(object sender, MouseButtonEventArgs e)

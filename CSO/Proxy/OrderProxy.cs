@@ -253,10 +253,26 @@ namespace CSO.Proxy
                 using (TransactionScope scope = new TransactionScope())
                 {
                     object[] parameters = {
-                        "@ID", orderProduct.ID
+                        "@OrderID", orderProduct.ID
                     };
 
                     DataSet result = DBHelper.ExecuteProcedure("uspOrderProductDelete", parameters);
+
+                    scope.Complete();
+                }
+            }
+        }
+        public static void Delete(OrderVO order)
+        {
+            if (order.ID != 0)
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    object[] parameters = {
+                        "@ID", order.ID
+                    };
+
+                    DBHelper.ExecuteProcedure("uspOrderDelete", parameters);
 
                     scope.Complete();
                 }

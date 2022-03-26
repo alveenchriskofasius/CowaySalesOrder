@@ -271,13 +271,13 @@ namespace CSO.UI
             List<CustomerVO> customers;
             try
             {
-                customers = await CustomerProxy.Data(false);
+                customers = await CustomerProxy.Data(withAll);
                 combo.ItemsSource = customers;
                 combo.SelectedValuePath = "ID";
                 combo.DisplayMemberPath = "Name";
                 if (withAll)
                 {
-                    customers.Add(new CustomerVO { ID = 0, Name = "Semua Pelanggan" });
+                    combo.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
