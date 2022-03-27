@@ -1,0 +1,23 @@
+Work flow assumptions :
+ Customer will contact and ask for questions about coway products, 
+ if customer is new and interested to buy, sales will input a new customer and if customer already exists,
+ sales can skip registration phase and input order,
+ I'm sorry, I am not capable to integrate for payment link generated right now.
+ sales will input orders and upload a photo (I assume the document is need only 1 and it's should be KTP) before save and link payment will generated (skip)
+ after payment, admin level 1 will verify the documents and admin level 2 will approved, if approved it will proceed to install verification from admin level 1
+ if success then technician will assign ct and will update the status of installation and if success it will proceed to completed status
+ if admin level 1 not success verify customer order or technician not success to install it will proceed to refund process
+ and user accounts payable will refund and order will be canceled.
+ 
+ for customer type and payment type, I assume it's outright and installment.
+ service package will be 12, 24, 36 installment package for customer below 65 years old and only 65 or above 65 have outright service package
+
+ menu visibility :
+ 1. Sales = only can access customer and order menu
+ 2. Admin level 1 : only can access dashboard and can verify document, process to verify call log,
+		    update rejected order to refund process and will be process by account payable
+ 3. Admin level 2 : can access and manipulate all menu, however Admin level 2 only can approved document that already verified from admin level 1
+ 4. Technician : only can access dashboard, techinican only assign ct and update the status of installation.
+ 5. Accounts Payable : only can access dashboard, Accounts Payable only process refund
+ 
+Person in charge (PIC) and CT cannot login
