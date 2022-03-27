@@ -80,6 +80,7 @@
     <Compile Include="Proxy\OrderProxy.cs" />
     <Compile Include="Proxy\ProductProxy.cs" />
     <Compile Include="Proxy\PromotionProxy.cs" />
+    <Compile Include="Proxy\RightProxy.cs" />
     <Compile Include="Proxy\RoleProxy.cs" />
     <Compile Include="Proxy\UserProxy.cs" />
     <Compile Include="Resource\Theme\CSO\ComboBox.xaml.cs">

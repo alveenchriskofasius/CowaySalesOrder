@@ -47,10 +47,16 @@ namespace CSO.UI
 
                 if (await UserProxy.Login(TextUsername.Text, TextPassword.Password))
                 {
-
-                    MainUI mainUI = new MainUI();
-                    mainUI.Show();
-                    this.Close();
+                    if (UserProxy.CurrentUser.Role("CT") || UserProxy.CurrentUser.Role("Person In Charge"))
+                    {
+                        MessageBox.Show("Role tidak bisa login", "Gagal Login", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        MainUI mainUI = new MainUI();
+                        mainUI.Show();
+                        this.Close();
+                    }
                 }
                 else
                 {

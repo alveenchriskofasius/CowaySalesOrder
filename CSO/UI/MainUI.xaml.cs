@@ -55,10 +55,49 @@ namespace CSO.UI
             SetProfile();
             SetMenuVisibility();
         }
-        private void SetMenuVisibility()
+        private async void SetMenuVisibility()
         {
-            //Customer.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("System") ? Visibility.Visible : Visibility.Collapsed;
-            Transaction.Visibility = Order.Visibility = User.Visibility = (!UserProxy.CurrentUser.Role("Sales") && !UserProxy.CurrentUser.Role("CT")) ? Visibility.Visible : Visibility.Collapsed;
+
+            List<RightsVO> rights = new List<RightsVO>();
+            foreach (RoleVO role in UserProxy.CurrentUser.Roles)
+            {
+                if (role.Selected)
+                {
+                    rights.AddRange(await RightProxy.Data(role));
+                }
+            }
+            List<RightsVO> availableMenus = rights.Where(m => m.IsAssigned == true).ToList();
+
+            foreach (MenuItem menu in Main_Menu.Items)
+            {
+
+                if (availableMenus.Find(h => h.Name == menu.Name.ToString()) == null)
+                {
+                    menu.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    menu.Visibility = Visibility.Visible;
+                    foreach (MenuItem submenu in menu.Items)
+                    {
+
+                        if (availableMenus.Find(h => h.Name == submenu.Name.ToString()) == null)
+                        {
+                            submenu.Visibility = Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            foreach (RightsVO right in availableMenus)
+                            {
+                                if (right.IsAssigned == true)
+                                {
+                                    submenu.Visibility = Visibility.Visible;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void Main_Unloaded(object sender, RoutedEventArgs e)

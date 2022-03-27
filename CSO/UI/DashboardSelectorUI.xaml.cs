@@ -271,7 +271,7 @@ namespace CSO.UI
                 case "RadioProcess":
                     _filter.StatusList += (int)Status.Process;
                     _primaryStatusID = (int)Status.OnCallProcess;
-                    ButtonPhone.Visibility = BorderPhone.Visibility = Visibility.Visible;
+                    ButtonPhone.Visibility = BorderPhone.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible: Visibility.Collapsed;
                     break;
                 case "RadioPhoneProcess":
                     _filter.StatusList += (int)Status.OnCallProcess;
@@ -279,7 +279,8 @@ namespace CSO.UI
                     _secondaryStatusID = (int)Status.Refund;
                     ButtonPrimaryStatus.Content = "Verifikasi berhasil";
                     ButtonCancel.Content = "Verifikasi gagal";
-                    ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility = Visibility.Visible;
+                    ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility =
+                    UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 case "RadioCTAssign":
                     _filter.StatusList += (int)Status.CTAssign + "," + (int)Status.CTAssigned;
@@ -298,10 +299,9 @@ namespace CSO.UI
                     break;
                 case "RadioRejected":
                     _filter.StatusList += (int)Status.Rejected;
-                    _secondaryStatusID = (int)Status.Refund; //change to cancel after refund
+                    _secondaryStatusID = (int)Status.Refund;
                     ButtonCancel.Content = "Proses Refund";
                     ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
-                    //ButtonPrimaryStatus.IsEnabled = UserProxy.CurrentUser.Role("Accounts Payable") && GridCustomer.Items.Count > 0;
                     ColumnRejectedOn.Width = ColumnRejectedBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     break;
                 case "RadioRefund":

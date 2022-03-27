@@ -106,6 +106,15 @@ namespace CSO.VO
                 SetProperty(ref _roles, value);
             }
         }
+        private List<RightsVO> _rights;
+        public List<RightsVO> Rights
+        {
+            get { return _rights; }
+            set
+            {
+                SetProperty(ref _rights, value);
+            }
+        }
         public UserVO()
         {
             Gender = "L";
