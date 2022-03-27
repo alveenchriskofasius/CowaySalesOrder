@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
-
+using CSO.Proxy;
 namespace CSO.VO
 {
     public class UserVO : BaseVO
@@ -36,13 +37,22 @@ namespace CSO.VO
                 SetProperty(ref _fullName, value);
             }
         }
-        private bool _active = false;
+        private bool _active = true;
         public bool Active
         {
             get { return _active; }
             set
             {
                 SetProperty(ref _active, value);
+            }
+        }
+        private bool _canSave = true;
+        public bool CanSave
+        {
+            get { return _canSave; }
+            set
+            {
+                SetProperty(ref _canSave, value);
             }
         }
         private string _username;
@@ -74,7 +84,18 @@ namespace CSO.VO
                 SetProperty(ref _gender, value);
             }
         }
-
+        private ObservableCollection<UserVO> _users = new ObservableCollection<UserVO>();
+        public ObservableCollection<UserVO> Users
+        {
+            get
+            {
+                return _users;
+            }
+            set
+            {
+                SetProperty(ref _users, value);
+            }
+        }
 
         private List<RoleVO> _roles;
         public List<RoleVO> Roles
@@ -87,8 +108,20 @@ namespace CSO.VO
         }
         public UserVO()
         {
+            Gender = "L";
         }
-
+        public bool CheckUsername()
+        {
+            Users = UserProxy.Data();
+            foreach (UserVO user in Users)
+            {
+                if (this.Username == user.Username && this.ID == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         public UserVO(UserVO user)
         {
             SetValue(user);
@@ -118,7 +151,36 @@ namespace CSO.VO
         public override string GetError(string columnName)
         {
             string result = null;
-
+            switch (columnName)
+            {
+                case "FullName":
+                    if (string.IsNullOrEmpty(FullName))
+                    {
+                        result = "Nama lengkap wajib diisi";
+                    }
+                    break;
+                case "Username":
+                    CanSave = CheckUsername();
+                    if (string.IsNullOrEmpty(Username))
+                        result = "Username wajib diisi";
+                    else if (!CanSave)
+                    {
+                        result = "Username sudah ada";
+                    }
+                    break;
+                case "Gender":
+                    if (string.IsNullOrEmpty(Gender))
+                    {
+                        result = "Jenis Kelamin wajib diisi";
+                    }
+                    break;
+                case "Password":
+                    if (string.IsNullOrEmpty(Password))
+                    {
+                        result = "Password wajib diisi";
+                    }
+                    break;
+            }
             return result;
         }
 

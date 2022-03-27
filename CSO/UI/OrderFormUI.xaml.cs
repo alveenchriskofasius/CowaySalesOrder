@@ -68,7 +68,6 @@ namespace CSO.UI
             ComboProduct.DataContext = TextPcs.DataContext = _orderProduct;
             FillComboProduct(ComboProduct);
             FillComboLookup(ComboPaymentType, "Type");
-            FillComboLookup(ComboServicePackage, "ServicePackage");
             FillComboCustomer(ComboCustomer);
             FillComboPromotion(ComboPromotion);
             FillComboPIC();
@@ -95,19 +94,22 @@ namespace CSO.UI
             {
                 order = new OrderVO();
                 _order.SetValue(order);
+                ComboServicePackage.IsEnabled = false;
             }
             else
             {
 
                 _order.SetValue(OrderProxy.Data(order.ID));
+                ComboServicePackage.ItemsSource = FillComboService(_order.TypeID);
                 _order.IsUploaded = _order.URLImage.Length > 0;
+                ComboServicePackage.IsEnabled = _order.ServicePackageID != 1 && _order.StatusID == 1;
             }
 
             GridProduct.ItemsSource = _order.Products;
             ImageUploaded.Visibility = _order.IsUploaded ? Visibility.Visible : Visibility.Collapsed;
             Calculate();
 
-            ButtonDelete.IsEnabled = _order.ID != 0;
+            ButtonDelete.IsEnabled = _order.ID != 0 && _order.StatusID == 1; // only status Open that can be deleted
 
         }
         private void Calculate()
@@ -123,7 +125,6 @@ namespace CSO.UI
             PromotionVO promotion = ComboPromotion.SelectedItem as PromotionVO;
             ProductVO product = ComboProduct.SelectedItem as ProductVO;
             LookupVO service = ComboServicePackage.SelectedItem as LookupVO;
-            List<LookupVO> services = ComboServicePackage.ItemsSource as List<LookupVO>;
             switch (combo.Name)
             {
 
@@ -143,7 +144,14 @@ namespace CSO.UI
                     if (customer == null) return;
                     LookupVO type = types.FirstOrDefault(x => x.ID == customer.TypeID);
                     ComboPaymentType.SelectedItem = type;
-                    if (type.ID == 1) { services.Where(x => x.ID == 1); }
+                    List<LookupVO> services = FillComboService(type.ID);
+                    if (type.ID == 1)
+                    {
+                        LookupVO selectPackage = services.Where(x => x.ID == 1).FirstOrDefault();
+                        ComboServicePackage.SelectedItem = selectPackage;
+                    }
+
+                    ComboServicePackage.IsEnabled = type.ID != 1;
                     Promotion();
                     break;
                 case "ComboPromotion":
@@ -166,6 +174,29 @@ namespace CSO.UI
             }
             ComboProduct.IsEnabled = TextPcs.IsEnabled = CheckBoxPromotion.IsEnabled = _order.CustomerID != 0 && _order.ServicePackageID != 0;
         }
+
+        private List<LookupVO> FillComboService(int typeID)
+        {
+            List<LookupVO> lookups =
+            typeID == 1 ? LookupProxy.Data("ServicePackage", null).Where(x => x.ID == 1).ToList() : LookupProxy.Data("ServicePackage", null).Where(x => x.ID != 1).ToList();
+            ComboServicePackage.ItemsSource = lookups;
+            ComboServicePackage.SelectedValuePath = "ID";
+            ComboServicePackage.DisplayMemberPath = "Name";
+            if (typeID == 2 && _order.ID > 0)
+            {
+                LookupVO lookup = lookups.FirstOrDefault(x => x.ID == _order.ServicePackageID);
+                if (lookup != null)
+                {
+                    ComboServicePackage.SelectedValue = lookup.ID;
+                }
+            }
+            else
+            {
+                ComboServicePackage.SelectedIndex = 0;
+            }
+            return lookups;
+        }
+
         private void Promotion()
         {
             List<ProductVO> products = ComboProduct.ItemsSource as List<ProductVO>;
@@ -232,7 +263,7 @@ namespace CSO.UI
         #region Command Definitions
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0 && GridProduct.Items.Count > 0 && _order.IsUploaded && _order.StatusID == 0;
+            e.CanExecute = _noOfErrorsOnScreen == 0 && GridProduct.Items.Count > 0 && _order.IsUploaded && _order.StatusID == 1;
             e.Handled = true;
         }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)

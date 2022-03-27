@@ -90,13 +90,13 @@ namespace CSO.VO
                 SetProperty(ref _customerID, value);
             }
         }
-        private int _customerType = 0;
-        public int CustomerType
+        private int _customerTypeID = 0;
+        public int CustomerTypeID
         {
-            get { return _customerType; }
+            get { return _customerTypeID; }
             set
             {
-                SetProperty(ref _customerType, value);
+                SetProperty(ref _customerTypeID, value);
             }
         }
         private DateTime _date = DateTime.Now;

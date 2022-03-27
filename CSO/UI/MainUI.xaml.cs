@@ -58,8 +58,7 @@ namespace CSO.UI
         private void SetMenuVisibility()
         {
             //Customer.Visibility = UserProxy.CurrentUser.Role("Admin") || UserProxy.CurrentUser.Role("System") ? Visibility.Visible : Visibility.Collapsed;
-            Transaction.Visibility = Order.Visibility = User.Visibility = !UserProxy.CurrentUser.Role("Sales") && !UserProxy.CurrentUser.Role("CT") ? Visibility.Visible : Visibility.Collapsed;
-
+            Transaction.Visibility = Order.Visibility = User.Visibility = (!UserProxy.CurrentUser.Role("Sales") && !UserProxy.CurrentUser.Role("CT")) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void Main_Unloaded(object sender, RoutedEventArgs e)

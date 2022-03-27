@@ -95,10 +95,9 @@ namespace CSO.Proxy
 
                 object[] parameters = {
                         "@Name", filter.FullName,
-                        "@ProvinceID", filter.ProvinceID,
                         "@CityID", filter.CityID,
                         "@AreaID", filter.AreaID,
-                        "@TypeID", filter.CustomerID,
+                        "@TypeID", filter.CustomerTypeID,
                         "@Active", filter.Active
                 };
 

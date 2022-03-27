@@ -41,7 +41,9 @@
         </StackPanel>
         <StackPanel Grid.Row="2">
             <Label Content="Nama Lengkap" Margin="5"/>
-            <TextBox x:Name="TextFullName" Width="125" HorizontalAlignment="Left" Margin="5" Text="{Binding FullName,UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="TextFullName" Width="125" HorizontalAlignment="Left" Margin="5" 
+                     Text="{Binding FullName,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}"
+                     Validation.Error="Validation_Error" Validation.ErrorTemplate="{StaticResource TextBoxErrorAdorner}"/>
             <Label Content="Jenis Kelamin" Margin="5" Style="{StaticResource LabelStyle}"  />
             <Grid Margin="5">
                 <StackPanel Name="PanelGender" FlowDirection="LeftToRight" Orientation="Horizontal" Width="100" HorizontalAlignment="Left">
@@ -51,8 +53,7 @@
 
             </Grid>
             <Label Content="Username " Margin="5" Style="{StaticResource LabelStyle}"  />
-            <TextBox Name="TextUsername" Margin="5" Width="125"  HorizontalAlignment="Left"
-                     materialDesign:ValidationAssist.PopupPlacement="Right" materialDesign:ValidationAssist.UsePopup="True"
+            <TextBox Name="TextUsername" Margin="5" Width="125"  HorizontalAlignment="Left" IsEnabled="False"
                      Validation.Error="Validation_Error" Validation.ErrorTemplate="{StaticResource TextBoxErrorAdorner}"
                      Text="{Binding Path=Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true, NotifyOnValidationError=true}" />
             <Label Content="Password " Margin="5" Style="{StaticResource LabelStyle}"  />

@@ -63,5 +63,10 @@ namespace CSO.UI
         {
             UserGrid.FillGrid();
         }
+
+        private void UserForm_NewData(object sender, EventArgs e)
+        {
+            UserGrid.GridUser.SelectedIndex = -1;
+        }
     }
 }

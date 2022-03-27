@@ -21,7 +21,7 @@
         <Rectangle Margin="0" Fill="{StaticResource TopMenuPanelBrush}" StrokeThickness="0" Grid.ColumnSpan="2"/>
 
         <TextBlock Grid.ColumnSpan="2" Margin="0,0,10,0"  HorizontalAlignment="Right" Style="{StaticResource TextBlockTitleTextStyle}">Master | <Bold>User</Bold></TextBlock>
-        <local:UserFormUI x:Name="UserForm" Grid.Row="1" DataChange="UserForm_DataChange" Margin="5"/>
+        <local:UserFormUI x:Name="UserForm" Grid.Row="1" DataChange="UserForm_DataChange" NewData="UserForm_NewData" Margin="5"/>
         <local:UserGridUI x:Name="UserGrid" Grid.Row="1" Grid.Column="1" SelectionChange="UserGrid_SelectionChange" Margin="5"/>
     </Grid>
 </local:BaseUI>

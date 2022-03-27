@@ -83,7 +83,7 @@
                     </StackPanel>
 
                 </Grid>
-                <Label Content="Alamat" HorizontalAlignment="Left"  Margin="5" Style="{StaticResource LabelStyle}" Grid.Row="3"/>
+                <Label Content="Alamat Tagihan" HorizontalAlignment="Left"  Margin="5" Style="{StaticResource LabelStyle}" Grid.Row="3"/>
                 <TextBox Text="{Binding Address,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True,NotifyOnValidationError=True}" 
                              VerticalAlignment="Top" VerticalContentAlignment="Top"  HorizontalAlignment="Left" Width="200" Height="55" Padding="5"
                              Margin="5" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap"

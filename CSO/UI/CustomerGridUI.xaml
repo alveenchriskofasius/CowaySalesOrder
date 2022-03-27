@@ -57,7 +57,7 @@
                          Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nama" TextChanged="TextName_TextChanged"/>
                 <ComboBox x:Name="ComboType" HorizontalAlignment="Left" Margin="10,5,20,0" VerticalAlignment="Top" Width="150" 
                           Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="ComboBox_SelectionChanged"
-                          SelectedValue="{Binding TraderTypeID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"  />
+                          SelectedValue="{Binding CustomerTypeID, NotifyOnValidationError=true, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"  />
                 <TextBlock Text="-- tipe --" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextBlockPlaceholderStyle}" Margin="-170,0,0,0" Tag="{Binding Text, ElementName=ComboType}"/>
                 <ComboBox Name="ComboCity" HorizontalAlignment="Left" Margin="0,5,20,0" VerticalAlignment="Top" Width="150" 
                                            Style="{StaticResource MaterialDesignComboBox}" ItemContainerStyle="{StaticResource ComboCityItemStyle}"

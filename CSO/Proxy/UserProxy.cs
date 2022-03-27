@@ -107,7 +107,6 @@ namespace CSO.Proxy
 
             try
             {
-
                 DataSet result = DBHelper.ExecuteProcedure("uspUserGet");
 
                 foreach (DataRow dataRow in result.Tables[0].Rows)
@@ -131,7 +130,29 @@ namespace CSO.Proxy
             return (users);
 
         }
+        public static UserVO Data(int id)
+        {
+            UserVO user = null;
+            try
+            {
+                object[] parameters = { "@ID", id };
+                DataSet result = DBHelper.ExecuteProcedure("uspUserGet", parameters);
+                if (result.Tables[0].Rows.Count > 0)
+                {
+                    user = new UserVO(result.Tables[0].Rows[0]);
+                }
 
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // has results
+            return user;
+
+        }
         public static void Delete(UserVO user)
         {
             if (user.ID != 0)

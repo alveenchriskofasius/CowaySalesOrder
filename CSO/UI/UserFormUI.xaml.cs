@@ -16,6 +16,7 @@ using CSO.VO;
 using CSO.Proxy;
 using CSO.Tool;
 using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace CSO.UI
 {
@@ -46,6 +47,15 @@ namespace CSO.UI
                 handler(this, e);
             }
         }
+        public event EventHandler<EventArgs> NewData;
+        protected virtual void OnNewData(EventArgs e)
+        {
+            EventHandler<EventArgs> handler = NewData;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
         #endregion
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
@@ -58,16 +68,20 @@ namespace CSO.UI
         {
 
             // new record
-            if (user == null || user.ID == 0)
+            if (user == null)
             {
                 //int UserID = 0;
                 user = new UserVO();
+                OnNewData(new EventArgs());
+                _user.SetValue(user);
             }
-
+            else
+            {
+                _user.SetValue(UserProxy.Data(user.ID));
+            }
             List<RoleVO> roles = ListboxRole.ItemsSource as List<RoleVO>;
             FillRole(roles, user.ID);
 
-            _user.SetValue(user);
 
             // Set form (password cannot be bound)
             TextPassword.Password = user.Password;
@@ -86,8 +100,9 @@ namespace CSO.UI
             if (user.ID == 0)
             {
                 TextFullName.Focus();
-            }
 
+            }
+            TextUsername.IsEnabled = user.ID == 0;
             ButtonDelete.IsEnabled = user.ID != 0;
         }
         public void ListboxRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -150,6 +165,7 @@ namespace CSO.UI
 
                             // Display message
                             Main.ShowMessage("Data berhasil dihapus ");
+                            FillForm(null);
                         }
                         catch (Exception ex)
                         {
@@ -164,8 +180,13 @@ namespace CSO.UI
         #region Command Definitions
         private void Save_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = _noOfErrorsOnScreen == 0;
-            e.Handled = true;
+
+            if (_user != null)
+            {
+                bool canSave = _user.CheckUsername();
+                e.CanExecute = _noOfErrorsOnScreen == 0 && canSave;
+                e.Handled = true;
+            }
         }
         private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
@@ -186,11 +207,12 @@ namespace CSO.UI
             {
                 List<RoleVO> roles = ListboxRole.ItemsSource as List<RoleVO>;
                 UserProxy.Save(ref _user, roles);
-                // Reset form
-                FillForm(_user);
+
                 OnDataChange(new EventArgs());
                 // Show message
                 Main.ShowMessage("Data berhasil disimpan");
+                // Reset form
+                FillForm(null);
 
             }
             catch (Exception ex)
@@ -209,5 +231,6 @@ namespace CSO.UI
                 _user.Password = passwordBox.Password;
             }
         }
+
     }
 }

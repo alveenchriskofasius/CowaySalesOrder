@@ -140,7 +140,7 @@
                     <TextBlock 
                         Text="-- tanggal awal --" 
                         Style="{StaticResource TextBlockPlaceholderStyle}" 
-                        Margin="-155,0,0,0" 
+                        Margin="-135,0,0,0" 
                         Tag="{Binding Text, ElementName=DatePickerFrom}" />
 
                     <DatePicker
@@ -155,7 +155,7 @@
                     <TextBlock 
                         Text="-- tanggal akhir --"
                         Style="{StaticResource TextBlockPlaceholderStyle}" 
-                        Margin="-155,0,0,0" 
+                        Margin="-135,0,0,0" 
                         Tag="{Binding Text, ElementName=DatePickerTo}" />
 
 
@@ -284,7 +284,7 @@
                                 <DataGridCheckBoxColumn
                                     x:Name="ColumnCheck"
                                     Header=""
-                                    Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged}"
+                                    Binding="{Binding Selected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     HeaderStyle="{StaticResource MaterialDesignDataGridColumnHeader}"
                                     ElementStyle="{StaticResource MaterialDesignCheckBox}"
                                     IsReadOnly="False" >
@@ -293,13 +293,14 @@
                                             <CheckBox
                                                 Style="{StaticResource MaterialDesignCheckBox}"
                                                 Foreground="{StaticResource MainTextBrush}"
+                                                FocusVisualStyle="{x:Null}"
                                                 x:Name="CheckBoxAll"
                                                 Checked="CheckBoxAll_Checked"
                                                 Unchecked="CheckBoxAll_Checked"/>
                                         </DataTemplate>
                                     </DataGridCheckBoxColumn.HeaderTemplate>
                                     <DataGridCheckBoxColumn.CellStyle>
-                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
+                                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
                                             <EventSetter Event="CheckBox.Checked" Handler="OnChecked" />
                                             <EventSetter Event="CheckBox.Unchecked" Handler="OnChecked" />
 

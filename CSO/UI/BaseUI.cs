@@ -245,7 +245,12 @@ namespace CSO.UI
                 combo.ItemsSource = lookups;
                 combo.SelectedValuePath = "ID";
                 combo.DisplayMemberPath = "Name";
+                if (withAll != null)
+                {
+                    combo.SelectedIndex = 0;
+                }
             }
+            
             catch (Exception ex)
             {
                 Main.ShowMessage("Gagal tarik data", ex.Message);

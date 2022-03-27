@@ -83,7 +83,7 @@ namespace CSO.UI
             }
             catch (Exception ex)
             {
-                Main.ShowMessage("Fetch failed", ex.Message);
+                Main.ShowMessage("Gagal tarik data", ex.Message);
             }
 
             Main.HideLoading();
@@ -190,7 +190,7 @@ namespace CSO.UI
             _filter = new FilterVO();
             _oldFilter = new FilterVO();
             DataContext = _filter;
-            FillComboLookup(ComboType, "CustomerType", "Semua Tipe");
+            FillComboLookup(ComboType, "Type", "Semua Tipe");   
             FillComboCity();
             FillGrid();
         }
