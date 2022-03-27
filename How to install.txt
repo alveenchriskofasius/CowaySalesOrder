@@ -1,0 +1,9 @@
+1. Restore database in Database folder to SQL Server Management
+2. Clone this repository and run with visual studio
+3. in Tool folder and DBHelper.cs there is a name of server connection and need to change for example
+        private static string defaultConnectionString = "Data Source=ALVEEN\\XCLAVEASTRO;Initial Catalog=CSO;Integrated Security=SSPI";
+   "ALVEEN\\XCLAVEASTRO" need to change to your servername in SQL Server Management
+4. Username and Password for first login :
+   Username : Admin
+   Password : CSOAdmin
+
