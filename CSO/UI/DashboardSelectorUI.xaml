@@ -322,16 +322,16 @@
                                 <DataGridTextColumn x:Name="ColumnApprovedOn" MinWidth="0" Header="Tanggal Disetujui" Binding="{Binding ApprovedOn,StringFormat=dd-MM-yyyy}"/>
                                 <DataGridTextColumn x:Name="ColumnApprovedBy" MinWidth="0" Header="Disetujui Oleh" Binding="{Binding ApprovedByName}"/>
                                 <DataGridTextColumn x:Name="ColumnAssignOn" MinWidth="0" Header="Tanggal Direfund" Binding="{Binding RefundOn,StringFormat=dd-MM-yyyy}"/>
-                                <DataGridTextColumn x:Name="ColumnAssignBy" MinWidth="0" Header="Direfund Oleh" Binding="{Binding RefundBy}"/>
+                                <DataGridTextColumn x:Name="ColumnAssignBy" MinWidth="0" Header="Direfund Oleh" Binding="{Binding RefundByName}"/>
                                 <DataGridTextColumn x:Name="ColumnAssign" Header="CT yang di assign" Binding="{Binding AssignedName}" IsReadOnly="True" />
                                 <DataGridTextColumn x:Name="ColumnCompletedOn" MinWidth="0" Header="Tanggal Selesai" Binding="{Binding CompletedOn,StringFormat=dd-MM-yyyy}"/>
-                                <DataGridTextColumn x:Name="ColumnCompletedBy" MinWidth="0" Header="Diselesaikan Oleh" Binding="{Binding CompletedBy}"/>
+                                <DataGridTextColumn x:Name="ColumnCompletedBy" MinWidth="0" Header="Diselesaikan Oleh" Binding="{Binding CompletedByName}"/>
                                 <DataGridTextColumn x:Name="ColumnRejectedOn" MinWidth="0" Header="Tanggal Ditolak" Binding="{Binding RejectedOn,StringFormat=dd-MM-yyyy}"/>
-                                <DataGridTextColumn x:Name="ColumnRejectedBy" MinWidth="0" Header="Ditolak Oleh" Binding="{Binding RejectedBy}"/>
+                                <DataGridTextColumn x:Name="ColumnRejectedBy" MinWidth="0" Header="Ditolak Oleh" Binding="{Binding RejectedByName}"/>
                                 <DataGridTextColumn x:Name="ColumnRefundOn" MinWidth="0" Header="Tanggal Direfund" Binding="{Binding RefundOn,StringFormat=dd-MM-yyyy}"/>
-                                <DataGridTextColumn x:Name="ColumnRefundBy" MinWidth="0" Header="Direfund Oleh" Binding="{Binding RefundBy}"/>
+                                <DataGridTextColumn x:Name="ColumnRefundBy" MinWidth="0" Header="Direfund Oleh" Binding="{Binding RefundByName}"/>
                                 <DataGridTextColumn x:Name="ColumnCancelOn" MinWidth="0" Header="Tanggal Dicancel" Binding="{Binding CanceledOn,StringFormat=dd-MM-yyyy}"/>
-                                <DataGridTextColumn x:Name="ColumnCancelBy" MinWidth="0" Header="Dicancel Oleh" Binding="{Binding CanceledBy}"/>
+                                <DataGridTextColumn x:Name="ColumnCancelBy" MinWidth="0" Header="Dicancel Oleh" Binding="{Binding CanceledByName}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>

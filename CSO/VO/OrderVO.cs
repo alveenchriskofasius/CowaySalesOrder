@@ -226,6 +226,107 @@ namespace CSO.VO
                 SetProperty(ref _isServiceChange, value);
             }
         }
+        private int _rejectedBy = 0;
+        public int RejectedBy
+        {
+            get { return _rejectedBy; }
+            set
+            {
+                SetProperty(ref _rejectedBy, value);
+            }
+        }
+        private string _rejectedOn = "";
+        public string RejectedOn
+        {
+            get { return _rejectedOn; }
+            set
+            {
+                SetProperty(ref _rejectedOn, value);
+            }
+        }
+        private string _rejectedByName = "";
+        public string RejectedByName
+        {
+            get { return _rejectedByName; }
+            set
+            {
+                SetProperty(ref _rejectedByName, value);
+            }
+        }
+        private string _refundOn = "";
+        public string RefundOn
+        {
+            get { return _refundOn; }
+            set
+            {
+                SetProperty(ref _refundOn, value);
+            }
+        }
+        private int _refundBy = 0;
+        public int RefundBy
+        {
+            get { return _refundBy; }
+            set
+            {
+                SetProperty(ref _refundBy, value);
+            }
+        }
+
+        private string _refundByName = "";
+        public string RefundByName
+        {
+            get { return _refundByName; }
+            set
+            {
+                SetProperty(ref _refundByName, value);
+            }
+        }
+        private string _completedOn = "";
+        public string CompletedOn
+        {
+            get { return _completedOn; }
+            set
+            {
+                SetProperty(ref _completedOn, value);
+            }
+        }
+        private int _completedBy = 0;
+        public int CompletedBy
+        {
+            get { return _completedBy; }
+            set
+            {
+                SetProperty(ref _completedBy, value);
+            }
+        }
+
+        private string _completedByName = "";
+        public string CompletedByName
+        {
+            get { return _completedByName; }
+            set
+            {
+                SetProperty(ref _completedByName, value);
+            }
+        }
+        private string _canceledOn = "";
+        public string CanceledOn
+        {
+            get { return _canceledOn; }
+            set
+            {
+                SetProperty(ref _canceledOn, value);
+            }
+        }
+        private string _canceledByName = "";
+        public string CanceledByName
+        {
+            get { return _canceledByName; }
+            set
+            {
+                SetProperty(ref _canceledByName, value);
+            }
+        }
         private ObservableCollection<OrderProductVO> _products = new ObservableCollection<OrderProductVO>();
         public ObservableCollection<OrderProductVO> Products
         {

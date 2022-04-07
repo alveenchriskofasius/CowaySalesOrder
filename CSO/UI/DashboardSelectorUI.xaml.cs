@@ -264,19 +264,19 @@ namespace CSO.UI
                     _filter.StatusList += (int)Status.Approved;
                     _primaryStatusID = (int)Status.Process;
                     ColumnVerificationOn.Width = ColumnVerificationBy.Width = ColumnApprovedOn.Width = ColumnApprovedBy.Width =
-                         UserProxy.CurrentUser.Role("Admin Level 1") && GridCustomer.Items.Count > 0 ? new DataGridLength(1, DataGridLengthUnitType.Auto) : 0;
+                         UserProxy.CurrentUser.Role("Admin Level 1") ? new DataGridLength(1, DataGridLengthUnitType.Auto) : 0;
                     ButtonPrimaryStatus.Content = "Proses";
                     ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 case "RadioProcess":
                     _filter.StatusList += (int)Status.Process;
                     _primaryStatusID = (int)Status.OnCallProcess;
-                    ButtonPhone.Visibility = BorderPhone.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible: Visibility.Collapsed;
+                    ButtonPhone.Visibility = BorderPhone.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
                     break;
                 case "RadioPhoneProcess":
                     _filter.StatusList += (int)Status.OnCallProcess;
                     _primaryStatusID = (int)Status.CTAssign;
-                    _secondaryStatusID = (int)Status.Refund;
+                    _secondaryStatusID = (int)Status.Rejected;
                     ButtonPrimaryStatus.Content = "Verifikasi berhasil";
                     ButtonCancel.Content = "Verifikasi gagal";
                     ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility =
@@ -285,7 +285,7 @@ namespace CSO.UI
                 case "RadioCTAssign":
                     _filter.StatusList += (int)Status.CTAssign + "," + (int)Status.CTAssigned;
                     _primaryStatusID = (int)Status.Completed;
-                    _secondaryStatusID = (int)Status.Refund;
+                    _secondaryStatusID = (int)Status.Rejected;
                     ButtonPrimaryStatus.Content = "Install berhasil";
                     ButtonCancel.Content = "Install gagal";
                     ButtonPrimaryStatus.Visibility = BorderPrimaryStatus.Visibility = ButtonCancel.Visibility = BorderCancel.Visibility =
@@ -301,20 +301,20 @@ namespace CSO.UI
                     _filter.StatusList += (int)Status.Rejected;
                     _secondaryStatusID = (int)Status.Refund;
                     ButtonCancel.Content = "Proses Refund";
-                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
+                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Accounts Payable") ? Visibility.Visible : Visibility.Collapsed;
                     ColumnRejectedOn.Width = ColumnRejectedBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     break;
                 case "RadioRefund":
                     _filter.StatusList += (int)Status.Refund;
                     _secondaryStatusID = (int)Status.Canceled;
                     ButtonCancel.Content = "Proses Cancel";
-                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Accounts Payable") ? Visibility.Visible : Visibility.Collapsed;
+                    ButtonCancel.Visibility = UserProxy.CurrentUser.Role("Admin Level 1") ? Visibility.Visible : Visibility.Collapsed;
                     ColumnRejectedOn.Width = ColumnRejectedBy.Width = ColumnRefundOn.Width = ColumnRefundBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
                     break;
                 case "RadioCanceled":
                     _filter.StatusList += (int)Status.Canceled;
                     ColumnVerificationOn.Width = ColumnVerificationBy.Width = ColumnApprovedOn.Width = ColumnApprovedBy.Width =
-                    ColumnCancelOn.Width = ColumnCancelBy.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
+                    ColumnCancelOn.Width = ColumnCancelBy.Width = ColumnRejectedBy.Width = ColumnRejectedOn.Width = ColumnRefundBy.Width = ColumnRefundOn.Width = new DataGridLength(1, DataGridLengthUnitType.Auto);
 
                     break;
 
@@ -391,11 +391,11 @@ namespace CSO.UI
             }
             else if (RadioRejected.IsChecked == true)
             {
-                ButtonCancel.IsEnabled = IsStatusUniform("Rejected", "Admin Level 1");
+                ButtonCancel.IsEnabled = IsStatusUniform("Rejected", "Accounts Payable");
             }
             else if (RadioRefund.IsChecked == true)
             {
-                ButtonCancel.IsEnabled = IsStatusUniform("Refund", "Accounts Payable");
+                ButtonCancel.IsEnabled = IsStatusUniform("Refund", "Admin Level 1");
             }
         }
 

@@ -156,7 +156,7 @@ namespace CSO.Proxy
                 object[] parameters = {
                     "@ID", customer.ID
                 };
-                DBHelper.ExecuteProcedure("uspTraderDelete", parameters);
+                DBHelper.ExecuteProcedure("uspCustomerDelete", parameters);
 
                 scope.Complete();
             }
