@@ -284,12 +284,7 @@ namespace CSO.UI
             {
                 await OrderProxy.Save(_order);
                 Main.ShowMessage("Data berhasil disimpan");
-                ButtonDelete.IsEnabled = _order.ID != 0;
-                // reset edited
-                foreach (OrderProductVO product in _order.Products)
-                {
-                    product.IsEdited = false;
-                }
+                FillForm(null);
             }
             catch (Exception e)
             {
