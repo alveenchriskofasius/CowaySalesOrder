@@ -11,7 +11,7 @@ namespace Helper
 {
     public static class DBHelper
     {
-        private static string defaultConnectionString = "Data Source=ALVEEN\\XCLAVEASTRO;Initial Catalog=CSO;Integrated Security=SSPI";
+        private static string defaultConnectionString = "Data Source=ALVEEN\\Alveen;Initial Catalog=CSO;Integrated Security=SSPI";
         private const int TIMEOUT = 60;
 
         public static string DefaultConnectionString { get; set; } = defaultConnectionString;
